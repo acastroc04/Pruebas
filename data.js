@@ -2,41 +2,39 @@
  * CONFIGURACIÓN DE PISTAS POR CATEGORÍA
  */
 const CLUES_SETS = {
-    "set1": {
-        title: "Aventura Alpha",
+    "daniela": {
+        title: "Desafío de Daniela",
         clues: [
             {
                 id: 1,
-                code: "INICIO",
-                title: "Pista 1-A",
-                description: "Busca donde se guardan las llaves del castillo.",
+                code: "HOLA",
+                title: "Pista 1",
+                description: "Ejemplo para Daniela.",
                 isFinal: false
-            },
-            {
-                id: 2,
-                code: "LLAVE",
-                title: "Pista 2-A",
-                description: "En el jardín, bajo la piedra que parece una tortuga.",
-                isFinal: true
             }
         ]
     },
-    "set2": {
-        title: "Desafío Beta",
+    "karla": {
+        title: "Aventura de Karla",
         clues: [
             {
                 id: 1,
                 code: "SOL",
-                title: "Pista 1-B",
-                description: "Donde el sol toca la ventana al amanecer.",
+                title: "Pista 1",
+                description: "Ejemplo para Karla.",
                 isFinal: false
-            },
+            }
+        ]
+    },
+    "carolina": {
+        title: "Misión de Carolina",
+        clues: [
             {
-                id: 2,
-                code: "LUZ",
-                title: "Pista 2-B",
-                description: "Dentro del libro de tapas rojas en la estantería.",
-                isFinal: true
+                id: 1,
+                code: "LUNA",
+                title: "Pista 1",
+                description: "Ejemplo para Carolina.",
+                isFinal: false
             }
         ]
     }
