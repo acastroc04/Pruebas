@@ -1,39 +1,48 @@
 /**
- * CONFIGURACIÓN DE PISTAS
- * Puedes añadir tantas como quieras siguiendo el formato.
+ * CONFIGURACIÓN DE PISTAS POR CATEGORÍA
  */
-const CLUES_DATA = [
-    {
-        id: 1,
-        code: "INICIO",
-        title: "La Primera Pista",
-        description: "Busca debajo de la mesa del salón, donde el tiempo se detiene.",
-        isFinal: false
+const CLUES_SETS = {
+    "set1": {
+        title: "Aventura Alpha",
+        clues: [
+            {
+                id: 1,
+                code: "INICIO",
+                title: "Pista 1-A",
+                description: "Busca donde se guardan las llaves del castillo.",
+                isFinal: false
+            },
+            {
+                id: 2,
+                code: "LLAVE",
+                title: "Pista 2-A",
+                description: "En el jardín, bajo la piedra que parece una tortuga.",
+                isFinal: true
+            }
+        ]
     },
-    {
-        id: 2,
-        code: "TIEMPO",
-        title: "El Segundo Paso",
-        description: "Mira detrás del cuadro del pasillo, el que tiene flores azules.",
-        isFinal: false
-    },
-    {
-        id: 3,
-        code: "AZUL",
-        title: "Casi al Final",
-        description: "En la cocina, donde guardas el café, encontrarás un pequeño sobre.",
-        isFinal: false
-    },
-    {
-        id: 4,
-        code: "CAFE",
-        title: "¡EL TESORO!",
-        description: "¡Felicidades! Has completado el desafío. El regalo está en el maletero del coche.",
-        isFinal: true
+    "set2": {
+        title: "Desafío Beta",
+        clues: [
+            {
+                id: 1,
+                code: "SOL",
+                title: "Pista 1-B",
+                description: "Donde el sol toca la ventana al amanecer.",
+                isFinal: false
+            },
+            {
+                id: 2,
+                code: "LUZ",
+                title: "Pista 2-B",
+                description: "Dentro del libro de tapas rojas en la estantería.",
+                isFinal: true
+            }
+        ]
     }
-];
+};
 
-// Exportar para que script.js pueda usarlo
+// Exportar
 if (typeof window !== 'undefined') {
-    window.CLUES_DATA = CLUES_DATA;
+    window.CLUES_SETS = CLUES_SETS;
 }
