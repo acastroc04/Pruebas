@@ -26,11 +26,11 @@ const CLUES_SETS = {
     "carolina": {
         title: "Misión de Carolina",
         clues: [
-            { id: 1, code: "L5Z9T3", title: "Pista 1", description: "[ESCRIBE AQUÍ LA PISTA 1]", isFinal: false },
-            { id: 2, code: "M1K4Q8", title: "Pista 2", description: "[ESCRIBE AQUÍ LA PISTA 2]", isFinal: false },
-            { id: 3, code: "N7V2R6", title: "Pista 3", description: "[ESCRIBE AQUÍ LA PISTA 3]", isFinal: false },
-            { id: 4, code: "P0W3S9", title: "Pista 4", description: "[ESCRIBE AQUÍ LA PISTA 4]", isFinal: false },
-            { id: 5, code: "Q8X1M5", title: "¡FINAL!", description: "[ESCRIBE AQUÍ LA PISTA FINAL]", isFinal: true }
+            { id: 1, code: "L5Z9T3", title: "Pista 1", description: "Busca al testigo que no conserva recuerdos, pero repite cada gesto sin equivocarse.", isFinal: false },
+            { id: 2, code: "M1K4Q8", title: "Pista 2", description: "Busca en la estantería el pequeño guardián del olor del bebe desnudo.", isFinal: false },
+            { id: 3, code: "N7V2R6", title: "Pista 3", description: "Busca el rincón pequeño donde la casa guarda su poder en silencio; no parece importante, pero desde ahí puede despertar entera o quedarse muda.", isFinal: false },
+            { id: 4, code: "P0W3S9", title: "Pista 4", description: "El secreto se guarda en la pisada del orco que odiaba el ruido.", isFinal: false },
+            { id: 5, code: "Q8X1M5", title: "¡FINAL!", description: "Dentro de tu virginidad intacta está la respuesta", isFinal: true }
         ]
     }
 };
