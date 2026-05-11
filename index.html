@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío de Pistas | Unlock</title>
+    <meta name="description" content="Introduce los códigos secretos para desbloquear las pistas del desafío.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Desafío de Pistas</h1>
+            <p class="subtitle">Encuentra los códigos y descubre tu recompensa</p>
+        </header>
+
+        <main>
+            <div class="unlock-card" id="unlockCard">
+                <p>¿Has encontrado un código? Introdúcelo aquí:</p>
+                <div class="input-group">
+                    <input type="text" id="codeInput" placeholder="Introduce el código..." autocomplete="off">
+                    <button id="unlockBtn">Desbloquear</button>
+                </div>
+                <p id="feedback" style="margin-top: 1rem; font-size: 0.9rem; min-height: 1.2rem;"></p>
+            </div>
+
+            <div class="clues-container">
+                <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem; opacity: 0.8;">Pistas Desbloqueadas</h2>
+                <div id="cluesList" class="clues-list">
+                    <!-- Las pistas aparecerán aquí dinámicamente -->
+                    <p id="noCluesMsg" style="text-align: center; color: var(--text-muted); padding: 2rem;">Aún no has desbloqueado ninguna pista.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 • Creado con ❤️ para el Desafío</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
