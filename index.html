@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,27 +22,33 @@
         <!-- Pantalla de Selección -->
         <div id="selectionScreen" class="selection-screen">
             <header>
+                <div class="icon-header">
+                    <i data-lucide="map-pin" class="main-icon"></i>
+                </div>
                 <h1>Elige tu camino</h1>
-                <p class="subtitle">Selecciona una de las dos aventuras para comenzar</p>
+                <p class="subtitle">Selecciona una de las aventuras para comenzar</p>
             </header>
             <div class="selection-grid">
                 <button class="selection-btn" data-set="daniela">
                     <div class="btn-image-container">
-                        <img src="assets/img/daniela.jpeg" alt="Daniela" onerror="this.src='https://via.placeholder.com/300x200?text=Daniela'">
+                        <img src="assets/img/daniela.jpeg" alt="Daniela" onerror="this.src='https://via.placeholder.com/300x300?text=Daniela'">
                     </div>
                     <span>Daniela</span>
+                    <i data-lucide="chevron-right" class="btn-arrow"></i>
                 </button>
                 <button class="selection-btn" data-set="karla">
                     <div class="btn-image-container">
-                        <img src="assets/img/karla.jpeg" alt="Karla" onerror="this.src='https://via.placeholder.com/300x200?text=Karla'">
+                        <img src="assets/img/karla.jpeg" alt="Karla" onerror="this.src='https://via.placeholder.com/300x300?text=Karla'">
                     </div>
                     <span>Karla</span>
+                    <i data-lucide="chevron-right" class="btn-arrow"></i>
                 </button>
                 <button class="selection-btn" data-set="carolina">
                     <div class="btn-image-container">
-                        <img src="assets/img/carolina.jpeg" alt="Carolina" onerror="this.src='https://via.placeholder.com/300x200?text=Carolina'">
+                        <img src="assets/img/carolina.jpeg" alt="Carolina" onerror="this.src='https://via.placeholder.com/300x300?text=Carolina'">
                     </div>
                     <span>Carolina</span>
+                    <i data-lucide="chevron-right" class="btn-arrow"></i>
                 </button>
             </div>
         </div>
@@ -47,38 +56,59 @@
         <!-- Pantalla de Juego (oculta inicialmente) -->
         <div id="gameScreen" style="display: none;">
             <header>
-                <button id="backBtn" class="back-link">← Cambiar aventura</button>
+                <button id="backBtn" class="back-link">
+                    <i data-lucide="arrow-left"></i>
+                    Cambiar aventura
+                </button>
                 <h1 id="gameTitle">Desafío de Pistas</h1>
-                <p class="subtitle">Encuentra los códigos y descubre tu recompensa</p>
+                <p class="subtitle">Introduce el código para revelar el siguiente paso</p>
             </header>
 
             <main>
                 <div class="unlock-card" id="unlockCard">
-                    <p>¿Has encontrado un código? Introdúcelo aquí:</p>
-                    <div class="input-group">
-                        <input type="text" id="codeInput" placeholder="Introduce el código..." autocomplete="off">
-                        <button id="unlockBtn">Desbloquear</button>
+                    <div class="card-header">
+                        <i data-lucide="key-round" class="card-icon"></i>
+                        <p>Introduce tu código secreto</p>
                     </div>
-                    <p id="feedback" style="margin-top: 1rem; font-size: 0.9rem; min-height: 1.2rem;"></p>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <i data-lucide="lock" class="input-icon"></i>
+                            <input type="text" id="codeInput" placeholder="CÓDIGO..." autocomplete="off">
+                        </div>
+                        <button id="unlockBtn">
+                            <span>Desbloquear</span>
+                            <i data-lucide="unlock"></i>
+                        </button>
+                    </div>
+                    <p id="feedback" class="feedback-msg"></p>
                 </div>
 
                 <div class="clues-container">
-                    <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem; opacity: 0.8;">Pistas Desbloqueadas</h2>
+                    <div class="section-title">
+                        <i data-lucide="scroll-text"></i>
+                        <h2>Pistas Desbloqueadas</h2>
+                    </div>
                     <div id="cluesList" class="clues-list">
-                        <!-- Las pistas aparecerán aquí dinámicamente -->
-                        <p id="noCluesMsg" style="text-align: center; color: var(--text-muted); padding: 2rem;">Aún no has desbloqueado ninguna pista.</p>
+                        <p id="noCluesMsg" class="empty-msg">
+                            <i data-lucide="search"></i>
+                            Aún no has encontrado nada.
+                        </p>
                     </div>
                 </div>
             </main>
         </div>
 
         <footer>
-            <p>&copy; 2026 • Creado con ❤️ para el Desafío</p>
+            <p>Hecho con <i data-lucide="heart" class="heart-icon"></i> para el Desafío • 2026</p>
         </footer>
     </div>
 
     <!-- Scripts -->
     <script src="data.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+    </script>
 </body>
 </html>

@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cargar progreso específico de este set
         unlockedIds = JSON.parse(localStorage.getItem(`unlocked_${setId}`)) || [];
         renderClues();
+        if (window.lucide) window.lucide.createIcons();
     }
 
     function handleUnlock() {
@@ -113,11 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clueEl = document.createElement('div');
                 clueEl.id = `clue-${clue.id}`;
                 clueEl.className = `clue-item ${clue.isFinal ? 'final' : ''}`;
-                clueEl.innerHTML = `<h3>${clue.title}</h3><p>${clue.description}</p>`;
+                clueEl.innerHTML = `
+                    <div class="clue-header">
+                        <i data-lucide="${clue.isFinal ? 'trophy' : 'map-pin'}"></i>
+                        <h3>${clue.title}</h3>
+                    </div>
+                    <p>${clue.description}</p>
+                `;
                 cluesList.appendChild(clueEl);
             });
+            if (window.lucide) window.lucide.createIcons();
         } else {
-            noCluesMsg.style.display = 'block';
+            noCluesMsg.style.display = 'flex'; // Usar flex para centrar con el icono
             cluesList.innerHTML = '';
             cluesList.appendChild(noCluesMsg);
         }
