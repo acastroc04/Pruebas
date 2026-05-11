@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!inputCode) return;
 
+        // Caso especial: Borrar progreso
+        if (inputCode === 'BORRAR') {
+            resetProgress();
+            codeInput.value = '';
+            return;
+        }
+
         // Buscar el código en los datos
         const foundClue = window.CLUES_DATA.find(c => c.code.toUpperCase() === inputCode);
 
@@ -39,6 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         codeInput.value = '';
+    }
+
+    function resetProgress() {
+        if (unlockedIds.length === 0) {
+            showFeedback('No hay nada que borrar.', 'info');
+            return;
+        }
+
+        if (confirm('¿Estás seguro de que quieres borrar todo tu progreso?')) {
+            unlockedIds = [];
+            localStorage.removeItem('unlockedClues');
+            renderClues();
+            showFeedback('Progreso borrado correctamente.', 'success');
+        }
     }
 
     function unlockClue(clue) {
