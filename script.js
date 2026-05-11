@@ -142,15 +142,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetProgress() {
-        if (unlockedIds.length === 0) {
-            showFeedback('No hay nada que borrar.', 'info');
-            return;
-        }
-        if (confirm('¿Borrar progreso de esta aventura?')) {
+        if (confirm('¿Estás seguro de que quieres borrar TODO el progreso de todas las aventuras?')) {
             unlockedIds = [];
-            localStorage.removeItem(`unlocked_${currentSetId}`);
-            renderClues();
-            showFeedback('Progreso reiniciado.', 'success');
+            // Borrar todas las posibles claves de localStorage
+            Object.keys(window.CLUES_SETS).forEach(setId => {
+                localStorage.removeItem(`unlocked_${setId}`);
+            });
+            localStorage.removeItem('selectedSet');
+            
+            showFeedback('Todo el progreso ha sido borrado.', 'success');
+            
+            // Recargar para volver al menú principal limpio
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
         }
     }
 
