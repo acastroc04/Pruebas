@@ -51,6 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const setData = window.CLUES_SETS[setId];
         if (!setData) return;
 
+        // Cambiar color de acento según la aventura
+        const root = document.documentElement;
+        if (setId === 'daniela') root.style.setProperty('--primary', 'var(--theme-daniela)');
+        else if (setId === 'karla') root.style.setProperty('--primary', 'var(--theme-karla)');
+        else if (setId === 'carolina') root.style.setProperty('--primary', 'var(--theme-carolina)');
+
         gameTitle.textContent = setData.title;
         selectionScreen.style.display = 'none';
         gameScreen.style.display = 'block';
