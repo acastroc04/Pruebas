@@ -267,7 +267,7 @@ footer {
     height: 100%;
     object-fit: scale-down; /* NO AMPLÍA NI RECORTA, MUESTRA LA FOTO COMPLETA Y NO ESCALA SI ES PEQUEÑA */
     transition: transform 0.5s ease;
-    background: rgba(15, 23, 42, 0.3); /* Fondo sutil para el espacio sobrante */
+    background: transparent; /* Eliminado el fondo */
 }
 
 .selection-btn:hover .btn-arrow {
@@ -281,7 +281,7 @@ footer {
     aspect-ratio: 1/1; /* IMAGEN CUADRADA */
     overflow: hidden;
     border-radius: 1rem;
-    border: 1px solid var(--glass-border);
+    border: none; /* Eliminado el contorno */
 }
 
 /* Modern Input with Icon */

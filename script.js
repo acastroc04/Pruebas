@@ -73,12 +73,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const setData = window.CLUES_SETS[currentSetId];
-        const foundClue = setData.clues.find(c => c.code.toUpperCase() === inputCode);
+        const clueIndex = setData.clues.findIndex(c => c.code.toUpperCase() === inputCode);
+        const foundClue = setData.clues[clueIndex];
 
         if (foundClue) {
             if (unlockedIds.includes(foundClue.id)) {
                 showFeedback('Ya has desbloqueado esta pista.', 'info');
             } else {
+                // Verificar si es la pista que toca (orden secuencial)
+                if (clueIndex > 0) {
+                    const previousClue = setData.clues[clueIndex - 1];
+                    if (!unlockedIds.includes(previousClue.id)) {
+                        showFeedback('Debes desbloquear la pista anterior primero.', 'error');
+                        triggerError();
+                        return;
+                    }
+                }
                 unlockClue(foundClue);
             }
         } else {
