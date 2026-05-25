@@ -260,8 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeClue && activeClue.code.toUpperCase() === inputCode) {
             gpsCodeInput.value = '';
             showGpsFeedback('¡Código de rescate aceptado!', 'success');
-            // Desbloquear simulado para evitar errores si el GPS real está inactivo
-            unlockGpsCheckpoint(true); 
+            // Desbloquear activando el GPS real para el siguiente punto (vibrará en móviles)
+            unlockGpsCheckpoint(false); 
         } else {
             showGpsFeedback('Código incorrecto.', 'error');
             // Efecto shake visual en el panel de rescate
@@ -313,6 +313,27 @@ document.addEventListener('DOMContentLoaded', () => {
         // Verificar si ya completamos todas las coordenadas de Olea
         if (currentGpsIndex >= setData.coordinates.length) {
             showGpsSuccessState();
+            return;
+        }
+
+        const target = setData.coordinates[currentGpsIndex];
+        gpsTargetName.textContent = `Objetivo: ${target.name}`;
+
+        // MODO ESPECIAL DE PRUEBAS LOCALES (file://)
+        // Permite avanzar en local de forma fluida sin llamar al GPS del navegador
+        if (window.location.protocol === 'file:') {
+            updateStatusBadge('success', 'Modo Simulador');
+            gpsDistanceVal.textContent = '--';
+            if (gpsWarningBox) gpsWarningBox.style.display = 'none';
+            if (radarTarget) radarTarget.style.display = 'none';
+            
+            // Actualizar dinámicamente el texto de instrucción en pantalla
+            const isFinalPoint = (currentGpsIndex === setData.coordinates.length - 1);
+            const threshold = isFinalPoint ? 15 : 20;
+            const gpsInstructionEl = document.querySelector('.gps-instruction');
+            if (gpsInstructionEl) {
+                gpsInstructionEl.innerHTML = `Cuando estés a menos de <strong>${threshold} metros</strong> del punto, la pista se desbloqueará sola.`;
+            }
             return;
         }
 
@@ -502,15 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reanudar GPS si quedan más objetivos, sino finalizar
             setTimeout(() => {
                 if (currentGpsIndex < setData.coordinates.length) {
-                    if (!isSimulated) {
-                        startGpsTracking();
-                    } else {
-                        // En simulación solo actualizamos textos
-                        const nextTarget = setData.coordinates[currentGpsIndex];
-                        gpsTargetName.textContent = `Objetivo: ${nextTarget.name}`;
-                        gpsDistanceVal.textContent = '--';
-                        if (radarTarget) radarTarget.style.display = 'none';
-                    }
+                    startGpsTracking();
                 } else {
                     showGpsSuccessState();
                 }
