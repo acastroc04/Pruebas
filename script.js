@@ -205,6 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const gpsWarningMsg = document.getElementById('gpsWarningMsg');
     const gpsRetryBtn = document.getElementById('gpsRetryBtn');
     const gpsResetBtn = document.getElementById('gpsResetBtn');
+    const gpsCodeInput = document.getElementById('gpsCodeInput');
+    const gpsUnlockBtn = document.getElementById('gpsUnlockBtn');
+    const gpsFeedback = document.getElementById('gpsFeedback');
     const radarTarget = document.getElementById('radarTarget');
 
     // Botón de reintento en caso de fallo de permisos
@@ -236,6 +239,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Iniciar de nuevo el rastreo desde el Punto 1
                 startGpsTracking();
             }
+        });
+    }
+
+    // Manejador del desbloqueo por código de rescate manual
+    function handleGpsRescueUnlock() {
+        if (!gpsCodeInput || !gpsFeedback) return;
+        const inputCode = gpsCodeInput.value.trim().toUpperCase();
+        if (!inputCode) return;
+
+        const setData = window.CLUES_SETS['olea'];
+        if (currentGpsIndex >= setData.coordinates.length) {
+            showGpsFeedback('¡La aventura ya está completada!', 'info');
+            gpsCodeInput.value = '';
+            return;
+        }
+
+        const activeClue = setData.clues[currentGpsIndex];
+        
+        if (activeClue && activeClue.code.toUpperCase() === inputCode) {
+            gpsCodeInput.value = '';
+            showGpsFeedback('¡Código de rescate aceptado!', 'success');
+            // Desbloquear simulado para evitar errores si el GPS real está inactivo
+            unlockGpsCheckpoint(true); 
+        } else {
+            showGpsFeedback('Código incorrecto.', 'error');
+            // Efecto shake visual en el panel de rescate
+            const rescuePanel = document.querySelector('.gps-rescue-panel');
+            if (rescuePanel) {
+                rescuePanel.classList.add('shake');
+                setTimeout(() => rescuePanel.classList.remove('shake'), 400);
+            }
+        }
+    }
+
+    function showGpsFeedback(message, type) {
+        if (!gpsFeedback) return;
+        gpsFeedback.textContent = message;
+        gpsFeedback.style.color = type === 'success' ? 'var(--success)' : 
+                                  type === 'info' ? 'var(--primary)' : 'var(--error)';
+        setTimeout(() => { if (gpsFeedback) gpsFeedback.textContent = ''; }, 3000);
+    }
+
+    if (gpsUnlockBtn) {
+        gpsUnlockBtn.addEventListener('click', handleGpsRescueUnlock);
+    }
+    if (gpsCodeInput) {
+        gpsCodeInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleGpsRescueUnlock();
         });
     }
 

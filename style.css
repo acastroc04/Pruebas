@@ -983,6 +983,104 @@ footer {
     transform: translateY(0);
 }
 
+/* GPS Rescue Panel (Bypass) */
+.gps-rescue-panel {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0 1rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.rescue-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.rescue-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--primary);
+}
+
+.rescue-input-group {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.rescue-input-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+
+.rescue-input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--primary);
+    opacity: 0.6;
+}
+
+.rescue-input-wrapper input {
+    width: 100%;
+    background: rgba(2, 6, 23, 0.4) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 1rem !important;
+    padding: 0.9rem 0.9rem 0.9rem 2.8rem !important;
+    color: white !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    font-family: inherit !important;
+}
+
+.rescue-input-wrapper input:focus {
+    outline: none !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2) !important;
+    background: rgba(2, 6, 23, 0.6) !important;
+}
+
+#gpsUnlockBtn {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(37, 99, 235, 0.8) 100%);
+    color: white;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 1rem;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    font-family: inherit;
+}
+
+#gpsUnlockBtn:hover {
+    transform: scale(1.02);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 1) 0%, rgba(37, 99, 235, 1) 100%);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+#gpsUnlockBtn:active {
+    transform: scale(0.98);
+}
+
 /* Mobile Responsive */
 @media (max-width: 600px) {
     h1 { font-size: 2rem; }

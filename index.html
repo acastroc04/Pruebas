@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafío de Pistas | Unlock</title>
     <meta name="description" content="Introduce los códigos secretos para desbloquear las pistas del desafío.">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <!-- Favicon (Lupa) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>">
-    
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>">
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Pantalla de Selección -->
@@ -34,28 +37,32 @@
             <div class="selection-grid">
                 <button class="selection-btn" data-set="daniela">
                     <div class="btn-image-container">
-                        <img src="assets/img/daniela.jpeg" alt="Daniela" onerror="this.src='https://via.placeholder.com/300x300?text=Daniela'">
+                        <img src="assets/img/daniela.jpeg" alt="Daniela"
+                            onerror="this.src='https://via.placeholder.com/300x300?text=Daniela'">
                     </div>
                     <span>Daniela</span>
                     <i data-lucide="chevron-right" class="btn-arrow"></i>
                 </button>
                 <button class="selection-btn" data-set="karla">
                     <div class="btn-image-container">
-                        <img src="assets/img/karla.jpeg" alt="Karla" onerror="this.src='https://via.placeholder.com/300x300?text=Karla'">
+                        <img src="assets/img/karla.jpeg" alt="Karla"
+                            onerror="this.src='https://via.placeholder.com/300x300?text=Karla'">
                     </div>
                     <span>Karla</span>
                     <i data-lucide="chevron-right" class="btn-arrow"></i>
                 </button>
                 <button class="selection-btn" data-set="carolina">
                     <div class="btn-image-container">
-                        <img src="assets/img/carolina.jpeg" alt="Carolina" onerror="this.src='https://via.placeholder.com/300x300?text=Carolina'">
+                        <img src="assets/img/carolina.jpeg" alt="Carolina"
+                            onerror="this.src='https://via.placeholder.com/300x300?text=Carolina'">
                     </div>
                     <span>Carolina</span>
                     <i data-lucide="chevron-right" class="btn-arrow"></i>
                 </button>
                 <button class="selection-btn" data-set="olea">
                     <div class="btn-image-container">
-                        <img src="assets/img/olea.jpg" alt="Olea" onerror="this.src='https://via.placeholder.com/300x300?text=Olea'">
+                        <img src="assets/img/olea.jpg" alt="Olea"
+                            onerror="this.src='https://via.placeholder.com/300x300?text=Olea'">
                     </div>
                     <span>Olea</span>
                     <i data-lucide="chevron-right" class="btn-arrow"></i>
@@ -98,7 +105,7 @@
                     <div class="card-header gps-header">
                         <div class="header-left">
                             <i data-lucide="compass" class="card-icon gps-pulse-icon"></i>
-                            <p>Aventura de Geolocalización</p>
+                            <p>Aventura por Córdoba</p>
                         </div>
                         <div class="header-right">
                             <button id="gpsResetBtn" class="gps-reset-btn" title="Reiniciar búsqueda GPS">
@@ -145,7 +152,8 @@
                         </div>
                     </div>
 
-                    <p class="gps-instruction">Muévete en el mundo real. Cuando estés a menos de <strong>20 metros</strong> del punto, la pista se desbloqueará sola.</p>
+                    <p class="gps-instruction">Cuando estés a menos de <strong>20
+                            metros</strong> del punto, la pista se desbloqueará sola.</p>
 
                     <!-- Línea de tiempo / Checkpoints -->
                     <div class="checkpoints-timeline">
@@ -170,6 +178,25 @@
                         </div>
                     </div>
 
+                    <!-- Código de Rescate (Bypass manual si falla el GPS) -->
+                    <div class="gps-rescue-panel">
+                        <div class="rescue-header">
+                            <i data-lucide="key-round" class="rescue-icon"></i>
+                            <p>¿Falla el GPS? Introduce código manual</p>
+                        </div>
+                        <div class="rescue-input-group">
+                            <div class="rescue-input-wrapper">
+                                <i data-lucide="lock" class="rescue-input-icon"></i>
+                                <input type="text" id="gpsCodeInput" placeholder="CÓDIGO DE RESCATE..." autocomplete="off">
+                            </div>
+                            <button id="gpsUnlockBtn">
+                                <span>Desbloquear</span>
+                                <i data-lucide="unlock"></i>
+                            </button>
+                        </div>
+                        <p id="gpsFeedback" class="feedback-msg"></p>
+                    </div>
+
                     <!-- Panel de Simulación / Modo Pruebas (Oculto por defecto, doble clic en cabecera para revelar) -->
                     <div class="sim-panel" id="gpsSimulator" style="display: none;">
                         <button id="simToggleBtn" class="sim-toggle-btn">
@@ -178,29 +205,38 @@
                             <i data-lucide="chevron-down" class="toggle-icon"></i>
                         </button>
                         <div id="simContent" class="sim-content" style="display: none;">
-                            <p class="sim-desc">Utiliza estos controles para probar la geolocalización desde cualquier parte del mundo.</p>
-                            
+                            <p class="sim-desc">Utiliza estos controles para probar la geolocalización desde cualquier
+                                parte del mundo.</p>
+
                             <div class="sim-grid">
                                 <div class="sim-col">
                                     <h4>Simular llegada (distancia &lt; 20m)</h4>
                                     <div class="btn-group">
-                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(0)">Llegar a Punto 1</button>
-                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(1)">Llegar a Punto 2</button>
-                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(2)">Llegar a Punto 3</button>
-                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(3)">Llegar a Punto 4</button>
+                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(0)">Llegar a
+                                            Punto 1</button>
+                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(1)">Llegar a
+                                            Punto 2</button>
+                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(2)">Llegar a
+                                            Punto 3</button>
+                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(3)">Llegar a
+                                            Punto 4</button>
                                     </div>
                                 </div>
                                 <div class="sim-col">
                                     <h4>Simular cercanía (distancia 25m)</h4>
                                     <div class="btn-group">
-                                        <button class="sim-btn" onclick="window.gpsSimulator.near(0)">Cerca de Punto 1</button>
-                                        <button class="sim-btn" onclick="window.gpsSimulator.near(1)">Cerca de Punto 2</button>
-                                        <button class="sim-btn" onclick="window.gpsSimulator.near(2)">Cerca de Punto 3</button>
-                                        <button class="sim-btn" onclick="window.gpsSimulator.near(3)">Cerca de Punto 4</button>
+                                        <button class="sim-btn" onclick="window.gpsSimulator.near(0)">Cerca de Punto
+                                            1</button>
+                                        <button class="sim-btn" onclick="window.gpsSimulator.near(1)">Cerca de Punto
+                                            2</button>
+                                        <button class="sim-btn" onclick="window.gpsSimulator.near(2)">Cerca de Punto
+                                            3</button>
+                                        <button class="sim-btn" onclick="window.gpsSimulator.near(3)">Cerca de Punto
+                                            4</button>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="sim-coords-form">
                                 <h4>Inyectar coordenadas exactas</h4>
                                 <div class="coords-row">
@@ -241,4 +277,5 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>

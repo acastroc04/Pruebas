@@ -45,10 +45,10 @@ const CLUES_SETS = {
             { lat: 37.88438079650529, lng: -4.789654769385989, name: "Punto 4" }
         ],
         clues: [
-            { id: 1, code: "GPS_1", title: "Pista 1", description: "¡Has alcanzado la primera ubicación!", isFinal: false },
-            { id: 2, code: "GPS_2", title: "Pista 2", description: "¡Has alcanzado la segunda ubicación!", isFinal: false },
-            { id: 3, code: "GPS_3", title: "Pista 3", description: "¡Has alcanzado la tercera ubicación!", isFinal: false },
-            { id: 4, code: "GPS_4", title: "¡FINAL!", description: "¡Has alcanzado la ubicación final!", isFinal: true }
+            { id: 1, code: "OL9A7F", title: "Pista 1", description: "¡Has alcanzado la primera ubicación!", isFinal: false },
+            { id: 2, code: "CD3B2M", title: "Pista 2", description: "¡Has alcanzado la segunda ubicación!", isFinal: false },
+            { id: 3, code: "PZ8K5L", title: "Pista 3", description: "¡Has alcanzado la tercera ubicación!", isFinal: false },
+            { id: 4, code: "FN4W1Y", title: "¡FINAL!", description: "¡Has alcanzado la ubicación final!", isFinal: true }
         ]
     }
 };
