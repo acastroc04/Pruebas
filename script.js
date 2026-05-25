@@ -21,10 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let watchId = null;
     let currentGpsIndex = 0;
 
-    // Inicializar
-    if (currentSetId) {
-        showGame(currentSetId);
-    }
 
     // Eventos de selección
     selectionBtns.forEach(btn => {
@@ -258,11 +254,16 @@ document.addEventListener('DOMContentLoaded', () => {
             maximumAge: 0
         };
 
-        watchId = navigator.geolocation.watchPosition(
-            handleGpsSuccess,
-            handleGpsError,
-            options
-        );
+        try {
+            watchId = navigator.geolocation.watchPosition(
+                handleGpsSuccess,
+                handleGpsError,
+                options
+            );
+        } catch (err) {
+            console.error('Error sincrónico de GPS:', err);
+            handleGpsError({ code: 1, message: err.message });
+        }
     }
 
     function stopGpsTracking() {
@@ -538,5 +539,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Introduce valores numéricos correctos.');
             }
         });
+    }
+
+    // ==========================================
+    // INICIALIZACIÓN DE LA APLICACIÓN
+    // ==========================================
+    // Se ejecuta al final para asegurar que todos los listeners estén registrados
+    if (currentSetId) {
+        showGame(currentSetId);
     }
 });
