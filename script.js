@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectionBtns = document.querySelectorAll('.selection-btn');
     const backBtn = document.getElementById('backBtn');
     const gameTitle = document.getElementById('gameTitle');
-    
+
     const codeInput = document.getElementById('codeInput');
     const unlockBtn = document.getElementById('unlockBtn');
     const cluesList = document.getElementById('cluesList');
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Estado de la aplicación
     let currentSetId = localStorage.getItem('selectedSet') || null;
     let unlockedIds = [];
-    
+
     // Estado GPS para Olea
     let watchId = null;
     let currentGpsIndex = 0;
@@ -122,10 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function unlockClue(clue) {
         unlockedIds.push(clue.id);
         localStorage.setItem(`unlocked_${currentSetId}`, JSON.stringify(unlockedIds));
-        
+
         showFeedback('¡Pista desbloqueada!', 'success');
         renderClues();
-        
+
         setTimeout(() => {
             const el = document.getElementById(`clue-${clue.id}`);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -171,9 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem(`unlocked_${setId}`);
             });
             localStorage.removeItem('selectedSet');
-            
+
             showFeedback('Todo el progreso ha sido borrado.', 'success');
-            
+
             // Recargar para volver al menú principal limpio
             setTimeout(() => {
                 location.reload();
@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showFeedback(message, type) {
         feedback.textContent = message;
-        feedback.style.color = type === 'success' ? 'var(--success)' : 
-                              type === 'info' ? 'var(--primary)' : 'var(--error)';
+        feedback.style.color = type === 'success' ? 'var(--success)' :
+            type === 'info' ? 'var(--primary)' : 'var(--error)';
         setTimeout(() => feedback.textContent = '', 3000);
     }
 
@@ -223,19 +223,19 @@ document.addEventListener('DOMContentLoaded', () => {
         gpsResetBtn.addEventListener('click', () => {
             if (confirm('¿Quieres reiniciar tu progreso en la aventura de Olea y empezar la búsqueda desde el primer punto?')) {
                 stopGpsTracking();
-                
+
                 // Limpiar progreso específico de Olea en localStorage
                 localStorage.removeItem('unlocked_olea');
-                
+
                 // Resetear estado
                 unlockedIds = [];
                 currentGpsIndex = 0;
-                
+
                 // Actualizar la interfaz de pistas (las vacía)
                 renderClues();
-                
+
                 showFeedback('Progreso de Olea reiniciado.', 'success');
-                
+
                 // Iniciar de nuevo el rastreo desde el Punto 1
                 startGpsTracking();
             }
@@ -256,12 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const activeClue = setData.clues[currentGpsIndex];
-        
+
         if (activeClue && activeClue.code.toUpperCase() === inputCode) {
             gpsCodeInput.value = '';
             showGpsFeedback('¡Código de rescate aceptado!', 'success');
             // Desbloquear activando el GPS real para el siguiente punto (vibrará en móviles)
-            unlockGpsCheckpoint(false); 
+            unlockGpsCheckpoint(false);
         } else {
             showGpsFeedback('Código incorrecto.', 'error');
             // Efecto shake visual en el panel de rescate
@@ -276,8 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function showGpsFeedback(message, type) {
         if (!gpsFeedback) return;
         gpsFeedback.textContent = message;
-        gpsFeedback.style.color = type === 'success' ? 'var(--success)' : 
-                                  type === 'info' ? 'var(--primary)' : 'var(--error)';
+        gpsFeedback.style.color = type === 'success' ? 'var(--success)' :
+            type === 'info' ? 'var(--primary)' : 'var(--error)';
         setTimeout(() => { if (gpsFeedback) gpsFeedback.textContent = ''; }, 3000);
     }
 
@@ -296,20 +296,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const dLat = (lat2 - lat1) * Math.PI / 180;
         const dLon = (lon2 - lon1) * Math.PI / 180;
         const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                  Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return Math.round(R * c); // Distancia en metros
     }
 
     function startGpsTracking() {
         stopGpsTracking(); // Detener rastreador existente antes de iniciar
-        
+
         currentGpsIndex = unlockedIds.length;
         updateTimeline();
 
         const setData = window.CLUES_SETS['olea'];
-        
+
         // Verificar si ya completamos todas las coordenadas de Olea
         if (currentGpsIndex >= setData.coordinates.length) {
             showGpsSuccessState();
@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gpsDistanceVal.textContent = '--';
             if (gpsWarningBox) gpsWarningBox.style.display = 'none';
             if (radarTarget) radarTarget.style.display = 'none';
-            
+
             // Actualizar dinámicamente el texto de instrucción en pantalla
             const isFinalPoint = (currentGpsIndex === setData.coordinates.length - 1);
             const threshold = isFinalPoint ? 15 : 20;
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // Realizar una primera actualización inmediata de la ubicación
             fetchPosition();
-            
+
             // Configurar actualización periódica cada 5 segundos (5000ms)
             watchId = setInterval(fetchPosition, 5000);
         } catch (err) {
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleGpsError(err) {
         console.error('Error de GPS:', err);
         let errorMsg = 'No se ha podido acceder a tu ubicación.';
-        
+
         if (err.code === 1) { // PERMISSION_DENIED
             errorMsg = 'Acceso a la ubicación denegado. Concede permisos de ubicación en tu navegador para continuar.';
         } else if (err.code === 2) { // POSITION_UNAVAILABLE
@@ -406,11 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Validación de contexto seguro (HTTPS) y protocolo file://
         if (window.location.protocol === 'file:') {
-            errorMsg = '<strong>¡Restricción del Navegador!</strong><br>' + 
-                       'Has abierto la web abriendo el archivo directamente (<code>file://</code>). ' + 
-                       'Los navegadores modernos bloquean el GPS por seguridad en archivos locales sin servidor.<br><br>' + 
-                       '<strong>Para probar en PC:</strong> Abre el <strong>Panel de Pruebas GPS</strong> que tienes abajo para simular tu avance.<br>' + 
-                       '<strong>Para jugar con GPS real:</strong> Deberás alojar esta carpeta en un servidor local (como Live Server) o subirla a un hosting HTTPS (como GitHub Pages).';
+            errorMsg = '<strong>¡Restricción del Navegador!</strong><br>' +
+                'Has abierto la web abriendo el archivo directamente (<code>file://</code>). ' +
+                'Los navegadores modernos bloquean el GPS por seguridad en archivos locales sin servidor.<br><br>' +
+                '<strong>Para probar en PC:</strong> Abre el <strong>Panel de Pruebas GPS</strong> que tienes abajo para simular tu avance.<br>' +
+                '<strong>Para jugar con GPS real:</strong> Deberás alojar esta carpeta en un servidor local (como Live Server) o subirla a un hosting HTTPS (como GitHub Pages).';
         } else if (!window.isSecureContext && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
             errorMsg = '¡Alerta! La geolocalización requiere una conexión segura (HTTPS) en dispositivos móviles. Por favor, accede con HTTPS.';
         }
@@ -432,17 +432,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const dLon = (lon2 - lon1) * Math.PI / 180;
         const phi1 = lat1 * Math.PI / 180;
         const phi2 = lat2 * Math.PI / 180;
-        
+
         const y = Math.sin(dLon) * Math.cos(phi2);
         const x = Math.cos(phi1) * Math.sin(phi2) -
-                  Math.sin(phi1) * Math.cos(phi2) * Math.cos(dLon);
-        
+            Math.sin(phi1) * Math.cos(phi2) * Math.cos(dLon);
+
         return Math.atan2(y, x);
     }
 
     function processPosition(lat, lng, isSimulated = false) {
         const setData = window.CLUES_SETS['olea'];
-        
+
         if (currentGpsIndex >= setData.coordinates.length) {
             showGpsSuccessState();
             return;
@@ -458,10 +458,10 @@ document.addEventListener('DOMContentLoaded', () => {
         gpsTargetName.textContent = `Objetivo: ${target.name}`;
 
         const distance = calculateDistance(lat, lng, target.lat, target.lng);
-        
+
         // Actualizar visualizador de distancia
         gpsDistanceVal.textContent = distance;
-        
+
         // Mover el punto del radar proporcionalmente con dirección real
         updateRadarDot(distance, lat, lng, target.lat, target.lng);
 
@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Actualizar dinámicamente el texto de instrucción en pantalla
         const gpsInstructionEl = document.querySelector('.gps-instruction');
         if (gpsInstructionEl) {
-            gpsInstructionEl.innerHTML = `Muévete en el mundo real. Cuando estés a menos de <strong>${threshold} metros</strong> del punto, la pista se desbloqueará sola.`;
+            gpsInstructionEl.innerHTML = `Cuando estés a menos de <strong>${threshold} metros</strong> del punto, la pista se desbloqueará sola.`;
         }
 
         // CONDICIÓN CRÍTICA: Desbloqueo según umbral dinámico (15m o 20m)
@@ -484,21 +484,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateRadarDot(distance, userLat, userLng, targetLat, targetLng) {
         if (!radarTarget) return;
         radarTarget.style.display = 'block';
-        
+
         // Cuanto más cerca, más cerca del centro del radar
         const maxRange = 150; // Rango máximo representado en el radar
         const normalized = Math.min(distance, maxRange) / maxRange; // 0 a 1
-        
+
         // 70px es el radio útil máximo del círculo de radar (180px de ancho total)
-        const radius = normalized * 70; 
-        
+        const radius = normalized * 70;
+
         // Calcular la dirección real (rumbo/bearing) del objetivo con respecto al usuario
         const bearing = calculateBearing(userLat, userLng, targetLat, targetLng);
-        
+
         // Convertir rumbo (0 = Norte, arriba) a coordenadas cartesianas de pantalla (arriba es -Y, derecha es +X)
         const x = Math.round(radius * Math.sin(bearing));
         const y = Math.round(-radius * Math.cos(bearing));
-        
+
         radarTarget.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
     }
 
@@ -517,9 +517,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Desbloqueo oficial de la pista
             unlockedIds.push(clue.id);
             localStorage.setItem('unlocked_olea', JSON.stringify(unlockedIds));
-            
+
             showFeedback('¡Objetivo alcanzado! Pista desbloqueada.', 'success');
-            
+
             // Efecto visual en la tarjeta
             const gpsCardEl = document.getElementById('gpsCard');
             if (gpsCardEl) {
@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             renderClues();
-            
+
             setTimeout(() => {
                 const el = document.getElementById(`clue-${clue.id}`);
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -613,7 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gpsHeaderTitle.addEventListener('dblclick', () => {
             const isCurrentlyHidden = gpsSimulatorPanel.style.display === 'none';
             gpsSimulatorPanel.style.display = isCurrentlyHidden ? 'block' : 'none';
-            
+
             if (isCurrentlyHidden) {
                 // Expandir controles automáticamente al revelarlo
                 if (simContent) {
@@ -638,36 +638,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Exportar simulador a window para botones HTML onclick
     window.gpsSimulator = {
-        arrive: function(stepIndex) {
+        arrive: function (stepIndex) {
             const setData = window.CLUES_SETS['olea'];
             if (stepIndex >= setData.coordinates.length) return;
-            
-            // Sincronizar índice para simular este paso específico
-            currentGpsIndex = stepIndex;
-            updateTimeline();
-            
-            const target = setData.coordinates[stepIndex];
-            console.log(`[SIMULADOR] Llegando a: ${target.name} (${target.lat}, ${target.lng})`);
-            processPosition(target.lat, target.lng, true);
-        },
-        near: function(stepIndex) {
-            const setData = window.CLUES_SETS['olea'];
-            if (stepIndex >= setData.coordinates.length) return;
-            
+
             // Sincronizar índice para simular este paso específico
             currentGpsIndex = stepIndex;
             updateTimeline();
 
             const target = setData.coordinates[stepIndex];
-            
+            console.log(`[SIMULADOR] Llegando a: ${target.name} (${target.lat}, ${target.lng})`);
+            processPosition(target.lat, target.lng, true);
+        },
+        near: function (stepIndex) {
+            const setData = window.CLUES_SETS['olea'];
+            if (stepIndex >= setData.coordinates.length) return;
+
+            // Sincronizar índice para simular este paso específico
+            currentGpsIndex = stepIndex;
+            updateTimeline();
+
+            const target = setData.coordinates[stepIndex];
+
             // Sumar un desfase muy pequeño (aproximadamente 25 metros de distancia)
             const simLat = target.lat + 0.00022;
             const simLng = target.lng;
-            
+
             console.log(`[SIMULADOR] Cercanía a: ${target.name} (Distancia ~25m)`);
             processPosition(simLat, simLng, true);
         },
-        inject: function(lat, lng) {
+        inject: function (lat, lng) {
             console.log(`[SIMULADOR] Inyección de posición exacta: ${lat}, ${lng}`);
             processPosition(lat, lng, true);
         }
