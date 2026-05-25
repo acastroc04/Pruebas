@@ -35,12 +35,18 @@ const CLUES_SETS = {
     },
     "olea": {
         title: "Aventura de Olea",
+        isGPS: true,
+        // Coordenadas objetivo para la aventura GPS (por defecto: Madrid, España)
+        // Puedes cambiar estas coordenadas por las que tú desees (lat: Latitud, lng: Longitud)
+        coordinates: [
+            { lat: 40.416775, lng: -3.703790, name: "Punto 1 (Sol)" },
+            { lat: 40.417312, lng: -3.701633, name: "Punto 2 (Plaza Mayor)" },
+            { lat: 40.419014, lng: -3.688348, name: "Punto 3 (Retiro)" }
+        ],
         clues: [
-            { id: 1, code: "R3T8W1", title: "Pista 1", description: "Busca en el lugar donde el agua danza y la frescura se guarda en el frío.", isFinal: false },
-            { id: 2, code: "S4P9V3", title: "Pista 2", description: "[ESCRIBE AQUÍ LA PISTA 2 DE OLEA]", isFinal: false },
-            { id: 3, code: "T5Q0X7", title: "Pista 3", description: "[ESCRIBE AQUÍ LA PISTA 3 DE OLEA]", isFinal: false },
-            { id: 4, code: "U6R1Y2", title: "Pista 4", description: "[ESCRIBE AQUÍ LA PISTA 4 DE OLEA]", isFinal: false },
-            { id: 5, code: "V7S2Z8", title: "¡FINAL!", description: "[ESCRIBE AQUÍ LA PISTA FINAL DE OLEA]", isFinal: true }
+            { id: 1, code: "GPS_1", title: "Pista 1", description: "¡Has alcanzado la primera ubicación! Tu primera pista: Busca en el lugar donde el agua danza y la frescura se guarda en el frío.", isFinal: false },
+            { id: 2, code: "GPS_2", title: "Pista 2", description: "¡Has alcanzado la segunda ubicación! Tu segunda pista: El conocimiento silencioso se esconde entre páginas de papel antiguo.", isFinal: false },
+            { id: 3, code: "GPS_3", title: "¡FINAL!", description: "¡Has alcanzado la ubicación final! Tu última pista: El premio está al alcance de tu mano, busca bajo la sombra de la estatua dorada.", isFinal: true }
         ]
     }
 };

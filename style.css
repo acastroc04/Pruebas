@@ -361,6 +361,536 @@ footer {
     fill: #ef4444;
 }
 
+/* ==========================================
+   GPS SECTION & RADAR STYLES (OLEA)
+   ========================================== */
+.gps-card {
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.gps-header {
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.gps-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.gps-pulse-icon {
+    animation: gpsIconPulse 2s infinite ease-in-out;
+}
+
+@keyframes gpsIconPulse {
+    0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5)); }
+    50% { transform: scale(1.1); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.8)); }
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(10px);
+}
+
+.status-badge.success {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-badge.error {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: currentColor;
+    border-radius: 50%;
+    animation: dotPulse 1.5s infinite alternate;
+}
+
+@keyframes dotPulse {
+    0% { opacity: 0.4; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+.gps-warning-box {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: #fca5a5;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.gps-warning-box i {
+    flex-shrink: 0;
+    color: var(--error);
+    margin-top: 0.15rem;
+}
+
+.warning-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.warning-text p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.mini-btn {
+    align-self: flex-start;
+    background: var(--error);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mini-btn:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+/* Radar Layout */
+.radar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2rem;
+    margin: 2.5rem 0;
+    flex-wrap: wrap;
+}
+
+.radar-container {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(15, 23, 42, 0.8) 0%, rgba(2, 6, 23, 0.9) 100%);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.15), inset 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.radar-sweep {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from 0deg, rgba(59, 130, 246, 0.4) 0%, transparent 40%, transparent 100%);
+    border-radius: 50%;
+    transform-origin: center;
+    animation: radarSweep 4s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes radarSweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.radar-circle {
+    position: absolute;
+    border: 1px dashed rgba(59, 130, 246, 0.15);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.radar-circle.outer { width: 85%; height: 85%; }
+.radar-circle.middle { width: 55%; height: 55%; }
+.radar-circle.inner { width: 25%; height: 25%; }
+
+.radar-center {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--theme-olea);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--theme-olea);
+    z-index: 3;
+}
+
+/* Radar Target Dot */
+.radar-target {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 4;
+}
+
+.target-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    left: 4px;
+    top: 4px;
+    box-shadow: 0 0 10px #10b981;
+}
+
+.target-glow {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #10b981;
+    border-radius: 50%;
+    animation: targetGlow 1.5s infinite ease-out;
+}
+
+@keyframes targetGlow {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.distance-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 180px;
+}
+
+.distance-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.distance-number {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin: 0.5rem 0;
+}
+
+#gpsDistanceVal {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 30%, var(--theme-olea) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+}
+
+.distance-number .unit {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--theme-olea);
+    margin-left: 0.25rem;
+}
+
+.target-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #93c5fd;
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.gps-instruction {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #94a3b8;
+    max-width: 85%;
+    margin: 0 auto 2rem;
+    line-height: 1.5;
+}
+
+/* Timeline Checkpoints */
+.checkpoints-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin: 2rem auto;
+    max-width: 90%;
+}
+
+.checkpoint-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 2;
+    cursor: default;
+}
+
+.step-dot {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.9);
+    border: 2px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: all 0.5s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.step-dot i {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.step-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.5s ease;
+}
+
+.timeline-line {
+    flex-grow: 1;
+    height: 3px;
+    background: var(--glass-border);
+    margin: 0 -0.5rem;
+    margin-bottom: 1.5rem;
+    z-index: 1;
+    position: relative;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.timeline-line::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: var(--theme-olea);
+    box-shadow: 0 0 10px var(--theme-olea);
+    transition: width 0.8s ease;
+}
+
+/* Timeline States */
+.checkpoint-step.completed .step-dot {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.checkpoint-step.completed .step-label {
+    color: var(--success);
+}
+
+.checkpoint-step.active .step-dot {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: var(--theme-olea);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.checkpoint-step.active .step-label {
+    color: white;
+    font-weight: 800;
+}
+
+.timeline-line.active::after {
+    width: 100%;
+}
+
+/* Simulator Panel */
+.sim-panel {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px dashed rgba(59, 130, 246, 0.3);
+    border-radius: 1.25rem;
+    margin-top: 2.5rem;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    font-family: monospace;
+}
+
+.sim-toggle-btn {
+    width: 100%;
+    background: rgba(59, 130, 246, 0.05);
+    border: none;
+    padding: 0.9rem 1.25rem;
+    color: #60a5fa;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.sim-toggle-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: #93c5fd;
+}
+
+.sim-toggle-btn .toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.sim-toggle-btn.open .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.sim-content {
+    padding: 1.25rem;
+    border-top: 1px solid rgba(59, 130, 246, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    animation: slideDown 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sim-desc {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.sim-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.sim-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sim-col h4, .sim-coords-form h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin: 0;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.sim-btn {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: monospace;
+    font-weight: 600;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.sim-btn:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateX(2px);
+}
+
+.sim-btn.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.25);
+    color: #a7f3d0;
+}
+
+.sim-btn.success:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.sim-btn.primary {
+    background: var(--theme-olea);
+    border-color: var(--theme-olea);
+    color: white;
+    text-align: center;
+}
+
+.sim-btn.primary:hover {
+    background: #2563eb;
+    transform: scale(1.02);
+}
+
+.sim-coords-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.coords-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.coords-row input {
+    flex-grow: 1;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: monospace;
+}
+
 /* Mobile Responsive */
 @media (max-width: 600px) {
     h1 { font-size: 2rem; }
@@ -368,4 +898,12 @@ footer {
     .unlock-card { padding: 1.75rem; border-radius: 2rem; }
     input { padding: 1rem 1rem 1rem 3rem; }
     .clue-item { padding: 1.25rem; }
+    
+    /* GPS Mobile Adaptations */
+    .radar-wrapper { flex-direction: column; gap: 1.5rem; margin: 1.5rem 0; }
+    .distance-number #gpsDistanceVal { font-size: 3rem; }
+    .checkpoints-timeline { max-width: 100%; }
+    .step-dot { width: 2.2rem; height: 2.2rem; }
+    .step-label { font-size: 0.7rem; }
+    .sim-grid { grid-template-columns: 1fr; }
 }

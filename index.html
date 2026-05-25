@@ -93,6 +93,113 @@
                     <p id="feedback" class="feedback-msg"></p>
                 </div>
 
+                <!-- NUEVA TARJETA: Geolocalización GPS para Olea -->
+                <div class="unlock-card gps-card" id="gpsCard" style="display: none;">
+                    <div class="card-header gps-header">
+                        <div class="header-left">
+                            <i data-lucide="compass" class="card-icon gps-pulse-icon"></i>
+                            <p>Aventura de Geolocalización</p>
+                        </div>
+                        <span id="gpsStatusBadge" class="status-badge warning">
+                            <span class="pulse-dot"></span>
+                            <span id="gpsStatusText">Buscando señal...</span>
+                        </span>
+                    </div>
+
+                    <!-- Mensajes de advertencia e instrucciones en HTTPS/Permisos -->
+                    <div id="gpsWarningBox" class="gps-warning-box" style="display: none;">
+                        <i data-lucide="alert-triangle"></i>
+                        <div class="warning-text">
+                            <p id="gpsWarningMsg">Para jugar esta sección, debes permitir el acceso a tu ubicación.</p>
+                            <button id="gpsRetryBtn" class="mini-btn">Reintentar</button>
+                        </div>
+                    </div>
+
+                    <!-- Radar Visual del GPS -->
+                    <div class="radar-wrapper">
+                        <div class="radar-container">
+                            <div class="radar-sweep"></div>
+                            <div class="radar-circle outer"></div>
+                            <div class="radar-circle middle"></div>
+                            <div class="radar-circle inner"></div>
+                            <div class="radar-target" id="radarTarget" style="display: none;">
+                                <span class="target-dot"></span>
+                                <span class="target-glow"></span>
+                            </div>
+                            <div class="radar-center"></div>
+                        </div>
+
+                        <div class="distance-display">
+                            <span class="distance-label">Distancia al objetivo</span>
+                            <div class="distance-number">
+                                <span id="gpsDistanceVal">--</span>
+                                <span class="unit">m</span>
+                            </div>
+                            <span id="gpsTargetName" class="target-name">Cargando coordenadas...</span>
+                        </div>
+                    </div>
+
+                    <p class="gps-instruction">Muévete en el mundo real. Cuando estés a menos de <strong>20 metros</strong> del punto, la pista se desbloqueará sola.</p>
+
+                    <!-- Línea de tiempo / Checkpoints -->
+                    <div class="checkpoints-timeline">
+                        <div class="checkpoint-step" data-step="1">
+                            <div class="step-dot"><i data-lucide="map-pin"></i></div>
+                            <span class="step-label">Punto 1</span>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="checkpoint-step" data-step="2">
+                            <div class="step-dot"><i data-lucide="map-pin"></i></div>
+                            <span class="step-label">Punto 2</span>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="checkpoint-step" data-step="3">
+                            <div class="step-dot"><i data-lucide="trophy"></i></div>
+                            <span class="step-label">¡Final!</span>
+                        </div>
+                    </div>
+
+                    <!-- Panel de Simulación / Modo Pruebas (Solo visible para pruebas) -->
+                    <div class="sim-panel" id="gpsSimulator">
+                        <button id="simToggleBtn" class="sim-toggle-btn">
+                            <i data-lucide="terminal"></i>
+                            <span>Panel de Pruebas GPS (Desarrollo)</span>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </button>
+                        <div id="simContent" class="sim-content" style="display: none;">
+                            <p class="sim-desc">Utiliza estos controles para probar la geolocalización desde cualquier parte del mundo.</p>
+                            
+                            <div class="sim-grid">
+                                <div class="sim-col">
+                                    <h4>Simular llegada (distancia &lt; 20m)</h4>
+                                    <div class="btn-group">
+                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(0)">Llegar a Punto 1</button>
+                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(1)">Llegar a Punto 2</button>
+                                        <button class="sim-btn success" onclick="window.gpsSimulator.arrive(2)">Llegar a Punto 3</button>
+                                    </div>
+                                </div>
+                                <div class="sim-col">
+                                    <h4>Simular cercanía (distancia 25m)</h4>
+                                    <div class="btn-group">
+                                        <button class="sim-btn" onclick="window.gpsSimulator.near(0)">Cerca de Punto 1</button>
+                                        <button class="sim-btn" onclick="window.gpsSimulator.near(1)">Cerca de Punto 2</button>
+                                        <button class="sim-btn" onclick="window.gpsSimulator.near(2)">Cerca de Punto 3</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="sim-coords-form">
+                                <h4>Inyectar coordenadas exactas</h4>
+                                <div class="coords-row">
+                                    <input type="number" id="simLat" placeholder="Latitud (ej. 40.416)" step="any">
+                                    <input type="number" id="simLng" placeholder="Longitud (ej. -3.703)" step="any">
+                                    <button class="sim-btn primary" id="simCoordsBtn">Inyectar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="clues-container">
                     <div class="section-title">
                         <i data-lucide="scroll-text"></i>
