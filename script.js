@@ -351,12 +351,20 @@ document.addEventListener('DOMContentLoaded', () => {
             maximumAge: 0
         };
 
-        try {
-            watchId = navigator.geolocation.watchPosition(
+        const fetchPosition = () => {
+            navigator.geolocation.getCurrentPosition(
                 handleGpsSuccess,
                 handleGpsError,
                 options
             );
+        };
+
+        try {
+            // Realizar una primera actualización inmediata de la ubicación
+            fetchPosition();
+            
+            // Configurar actualización periódica cada 5 segundos (5000ms)
+            watchId = setInterval(fetchPosition, 5000);
         } catch (err) {
             console.error('Error sincrónico de GPS:', err);
             handleGpsError({ code: 1, message: err.message });
@@ -365,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function stopGpsTracking() {
         if (watchId !== null) {
-            navigator.geolocation.clearWatch(watchId);
+            clearInterval(watchId);
             watchId = null;
         }
     }
