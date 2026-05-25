@@ -585,6 +585,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // CONTROLADOR DEL SIMULADOR GPS (MODO PRUEBAS)
     // ==========================================
+    const ENABLE_DEV_PANEL = false; // Cambiar a true para habilitar y poder acceder al panel de pruebas
     const simToggleBtn = document.getElementById('simToggleBtn');
     const simContent = document.getElementById('simContent');
     const simLatInput = document.getElementById('simLat');
@@ -594,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Activador Secreto: Doble clic en el título de la cabecera (icono brújula / "Aventura de Geolocalización")
     const gpsHeaderTitle = document.querySelector('.gps-header .header-left');
-    if (gpsHeaderTitle && gpsSimulatorPanel) {
+    if (ENABLE_DEV_PANEL && gpsHeaderTitle && gpsSimulatorPanel) {
         gpsHeaderTitle.addEventListener('dblclick', () => {
             const isCurrentlyHidden = gpsSimulatorPanel.style.display === 'none';
             gpsSimulatorPanel.style.display = isCurrentlyHidden ? 'block' : 'none';
