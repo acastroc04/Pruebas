@@ -13,6 +13,7 @@
     --theme-daniela: #f472b6; /* Rosa */
     --theme-karla: #2dd4bf;   /* Cyan */
     --theme-carolina: #fbbf24; /* Ámbar */
+    --theme-olea: #10b981;    /* Esmeralda */
 }
 
 /* Base resets */
@@ -68,7 +69,7 @@ body::after {
 }
 
 .container {
-    max-width: 650px;
+    max-width: 800px;
     width: 100%;
     z-index: 1;
 }
@@ -139,6 +140,7 @@ p.subtitle {
 .selection-btn[data-set="daniela"]:hover { border-color: var(--theme-daniela); box-shadow: 0 0 30px -5px rgba(244, 114, 182, 0.3); }
 .selection-btn[data-set="karla"]:hover { border-color: var(--theme-karla); box-shadow: 0 0 30px -5px rgba(45, 212, 191, 0.3); }
 .selection-btn[data-set="carolina"]:hover { border-color: var(--theme-carolina); box-shadow: 0 0 30px -5px rgba(251, 191, 36, 0.3); }
+.selection-btn[data-set="olea"]:hover { border-color: var(--theme-olea); box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.3); }
 
 .selection-btn:hover {
     transform: translateY(-12px) scale(1.03);
@@ -298,8 +300,8 @@ input:focus {
 }
 
 .clue-item.final {
-    border-left-color: var(--theme-carolina);
-    background: linear-gradient(90deg, rgba(251, 191, 36, 0.05) 0%, transparent 100%);
+    border-left-color: var(--primary);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
 }
 
 .clue-header {
@@ -315,7 +317,7 @@ input:focus {
     color: var(--primary);
 }
 
-.clue-item.final .clue-header i { color: var(--theme-carolina); }
+.clue-item.final .clue-header i { color: var(--primary); }
 
 .clue-item h3 {
     font-size: 1rem;
