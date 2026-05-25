@@ -372,8 +372,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mover el punto del radar proporcionalmente
         updateRadarDot(distance);
 
-        // CONDICIÓN CRÍTICA: Desbloqueo a 20 metros
-        if (distance <= 20) {
+        // DETERMINACIÓN DE UMBRAL: 15 metros para el punto final, 20 metros para los demás
+        const isFinalPoint = (currentGpsIndex === setData.coordinates.length - 1);
+        const threshold = isFinalPoint ? 15 : 20;
+
+        // Actualizar dinámicamente el texto de instrucción en pantalla
+        const gpsInstructionEl = document.querySelector('.gps-instruction');
+        if (gpsInstructionEl) {
+            gpsInstructionEl.innerHTML = `Muévete en el mundo real. Cuando estés a menos de <strong>${threshold} metros</strong> del punto, la pista se desbloqueará sola.`;
+        }
+
+        // CONDICIÓN CRÍTICA: Desbloqueo según umbral dinámico (15m o 20m)
+        if (distance <= threshold) {
             unlockGpsCheckpoint(isSimulated);
         }
     }
@@ -508,6 +518,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const simLatInput = document.getElementById('simLat');
     const simLngInput = document.getElementById('simLng');
     const simCoordsBtn = document.getElementById('simCoordsBtn');
+    const gpsSimulatorPanel = document.getElementById('gpsSimulator');
+
+    // Activador Secreto: Doble clic en el título de la cabecera (icono brújula / "Aventura de Geolocalización")
+    const gpsHeaderTitle = document.querySelector('.gps-header .header-left');
+    if (gpsHeaderTitle && gpsSimulatorPanel) {
+        gpsHeaderTitle.addEventListener('dblclick', () => {
+            const isCurrentlyHidden = gpsSimulatorPanel.style.display === 'none';
+            gpsSimulatorPanel.style.display = isCurrentlyHidden ? 'block' : 'none';
+            
+            if (isCurrentlyHidden) {
+                // Expandir controles automáticamente al revelarlo
+                if (simContent) {
+                    simContent.style.display = 'block';
+                    if (simToggleBtn) simToggleBtn.classList.add('open');
+                }
+                // Scroll suave hasta el panel
+                setTimeout(() => {
+                    gpsSimulatorPanel.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }, 100);
+            }
+        });
+    }
 
     if (simToggleBtn && simContent) {
         simToggleBtn.addEventListener('click', () => {
