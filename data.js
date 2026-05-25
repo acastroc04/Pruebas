@@ -39,7 +39,7 @@ const CLUES_SETS = {
         // Coordenadas objetivo para la aventura GPS (por defecto: Madrid, España)
         // Puedes cambiar estas coordenadas por las que tú desees (lat: Latitud, lng: Longitud)
         coordinates: [
-            { lat: 40.416775, lng: -3.703790, name: "Punto 1 (Sol)" },
+            { lat: 37.874223, lng: -4.767843, name: "Punto 1 (Portada Feria)" },
             { lat: 40.417312, lng: -3.701633, name: "Punto 2 (Plaza Mayor)" },
             { lat: 40.419014, lng: -3.688348, name: "Punto 3 (Retiro)" }
         ],
