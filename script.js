@@ -427,6 +427,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (radarTarget) radarTarget.style.display = 'none';
     }
 
+    // Calcular rumbo/azimut real entre dos coordenadas GPS (retorna radianes: 0 = Norte, horario)
+    function calculateBearing(lat1, lon1, lat2, lon2) {
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const phi1 = lat1 * Math.PI / 180;
+        const phi2 = lat2 * Math.PI / 180;
+        
+        const y = Math.sin(dLon) * Math.cos(phi2);
+        const x = Math.cos(phi1) * Math.sin(phi2) -
+                  Math.sin(phi1) * Math.cos(phi2) * Math.cos(dLon);
+        
+        return Math.atan2(y, x);
+    }
+
     function processPosition(lat, lng, isSimulated = false) {
         const setData = window.CLUES_SETS['olea'];
         
@@ -449,8 +462,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Actualizar visualizador de distancia
         gpsDistanceVal.textContent = distance;
         
-        // Mover el punto del radar proporcionalmente
-        updateRadarDot(distance);
+        // Mover el punto del radar proporcionalmente con dirección real
+        updateRadarDot(distance, lat, lng, target.lat, target.lng);
 
         // DETERMINACIÓN DE UMBRAL: 15 metros para el punto final, 20 metros para los demás
         const isFinalPoint = (currentGpsIndex === setData.coordinates.length - 1);
@@ -468,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateRadarDot(distance) {
+    function updateRadarDot(distance, userLat, userLng, targetLat, targetLng) {
         if (!radarTarget) return;
         radarTarget.style.display = 'block';
         
@@ -479,11 +492,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // 70px es el radio útil máximo del círculo de radar (180px de ancho total)
         const radius = normalized * 70; 
         
-        // Usamos un ángulo característico para cada checkpoint (90 grados por punto para 4 puntos)
-        const angle = (currentGpsIndex * 90 + 35) * Math.PI / 180;
+        // Calcular la dirección real (rumbo/bearing) del objetivo con respecto al usuario
+        const bearing = calculateBearing(userLat, userLng, targetLat, targetLng);
         
-        const x = Math.round(radius * Math.cos(angle));
-        const y = Math.round(radius * Math.sin(angle));
+        // Convertir rumbo (0 = Norte, arriba) a coordenadas cartesianas de pantalla (arriba es -Y, derecha es +X)
+        const x = Math.round(radius * Math.sin(bearing));
+        const y = Math.round(-radius * Math.cos(bearing));
         
         radarTarget.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
     }
