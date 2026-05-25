@@ -204,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gpsWarningBox = document.getElementById('gpsWarningBox');
     const gpsWarningMsg = document.getElementById('gpsWarningMsg');
     const gpsRetryBtn = document.getElementById('gpsRetryBtn');
+    const gpsResetBtn = document.getElementById('gpsResetBtn');
     const radarTarget = document.getElementById('radarTarget');
 
     // Botón de reintento en caso de fallo de permisos
@@ -211,6 +212,30 @@ document.addEventListener('DOMContentLoaded', () => {
         gpsRetryBtn.addEventListener('click', () => {
             gpsWarningBox.style.display = 'none';
             startGpsTracking();
+        });
+    }
+
+    // Botón de reinicio para la aventura de Olea
+    if (gpsResetBtn) {
+        gpsResetBtn.addEventListener('click', () => {
+            if (confirm('¿Quieres reiniciar tu progreso en la aventura de Olea y empezar la búsqueda desde el primer punto?')) {
+                stopGpsTracking();
+                
+                // Limpiar progreso específico de Olea en localStorage
+                localStorage.removeItem('unlocked_olea');
+                
+                // Resetear estado
+                unlockedIds = [];
+                currentGpsIndex = 0;
+                
+                // Actualizar la interfaz de pistas (las vacía)
+                renderClues();
+                
+                showFeedback('Progreso de Olea reiniciado.', 'success');
+                
+                // Iniciar de nuevo el rastreo desde el Punto 1
+                startGpsTracking();
+            }
         });
     }
 

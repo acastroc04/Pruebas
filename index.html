@@ -66,9 +66,9 @@
         <!-- Pantalla de Juego (oculta inicialmente) -->
         <div id="gameScreen" style="display: none;">
             <header>
-                <button id="backBtn" class="back-link">
-                    <i data-lucide="arrow-left"></i>
-                    Cambiar aventura
+                <button id="backBtn" class="modern-back-btn">
+                    <i data-lucide="map"></i>
+                    <span>Cambiar Ruta</span>
                 </button>
                 <h1 id="gameTitle">Desafío de Pistas</h1>
                 <p class="subtitle">Introduce el código para revelar el siguiente paso</p>
@@ -100,10 +100,16 @@
                             <i data-lucide="compass" class="card-icon gps-pulse-icon"></i>
                             <p>Aventura de Geolocalización</p>
                         </div>
-                        <span id="gpsStatusBadge" class="status-badge warning">
-                            <span class="pulse-dot"></span>
-                            <span id="gpsStatusText">Buscando señal...</span>
-                        </span>
+                        <div class="header-right">
+                            <button id="gpsResetBtn" class="gps-reset-btn" title="Reiniciar búsqueda GPS">
+                                <i data-lucide="rotate-ccw"></i>
+                                <span>Reiniciar</span>
+                            </button>
+                            <span id="gpsStatusBadge" class="status-badge warning">
+                                <span class="pulse-dot"></span>
+                                <span id="gpsStatusText">Buscando señal...</span>
+                            </span>
+                        </div>
                     </div>
 
                     <!-- Mensajes de advertencia e instrucciones en HTTPS/Permisos -->
