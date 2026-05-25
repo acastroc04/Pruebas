@@ -321,12 +321,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (radarTarget) radarTarget.style.display = 'none';
     }
 
-    function processPosition(lat, lng) {
+    function processPosition(lat, lng, isSimulated = false) {
         const setData = window.CLUES_SETS['olea'];
         
         if (currentGpsIndex >= setData.coordinates.length) {
             showGpsSuccessState();
             return;
+        }
+
+        // Si estamos simulando o procesando una posición válida, ocultamos el error del file:// o GPS real
+        if (gpsWarningBox) gpsWarningBox.style.display = 'none';
+        if (isSimulated) {
+            updateStatusBadge('success', 'Modo Simulador');
         }
 
         const target = setData.coordinates[currentGpsIndex];
@@ -342,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // CONDICIÓN CRÍTICA: Desbloqueo a 20 metros
         if (distance <= 20) {
-            unlockGpsCheckpoint();
+            unlockGpsCheckpoint(isSimulated);
         }
     }
 
@@ -366,15 +372,15 @@ document.addEventListener('DOMContentLoaded', () => {
         radarTarget.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
     }
 
-    function unlockGpsCheckpoint() {
+    function unlockGpsCheckpoint(isSimulated = false) {
         const setData = window.CLUES_SETS['olea'];
         const clue = setData.clues[currentGpsIndex];
 
         if (clue && !unlockedIds.includes(clue.id)) {
             stopGpsTracking(); // Pausamos el watch para evitar multihilos durante la animación
 
-            // Vibración háptica en móviles si está soportado
-            if (navigator.vibrate) {
+            // Vibración háptica en móviles si está soportado y no es simulación
+            if (navigator.vibrate && !isSimulated) {
                 navigator.vibrate([200, 100, 300]);
             }
 
@@ -409,7 +415,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reanudar GPS si quedan más objetivos, sino finalizar
             setTimeout(() => {
                 if (currentGpsIndex < setData.coordinates.length) {
-                    startGpsTracking();
+                    if (!isSimulated) {
+                        startGpsTracking();
+                    } else {
+                        // En simulación solo actualizamos textos
+                        const nextTarget = setData.coordinates[currentGpsIndex];
+                        gpsTargetName.textContent = `Objetivo: ${nextTarget.name}`;
+                        gpsDistanceVal.textContent = '--';
+                        if (radarTarget) radarTarget.style.display = 'none';
+                    }
                 } else {
                     showGpsSuccessState();
                 }
@@ -489,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const target = setData.coordinates[stepIndex];
             console.log(`[SIMULADOR] Llegando a: ${target.name} (${target.lat}, ${target.lng})`);
-            processPosition(target.lat, target.lng);
+            processPosition(target.lat, target.lng, true);
         },
         near: function(stepIndex) {
             const setData = window.CLUES_SETS['olea'];
@@ -506,11 +520,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const simLng = target.lng;
             
             console.log(`[SIMULADOR] Cercanía a: ${target.name} (Distancia ~25m)`);
-            processPosition(simLat, simLng);
+            processPosition(simLat, simLng, true);
         },
         inject: function(lat, lng) {
             console.log(`[SIMULADOR] Inyección de posición exacta: ${lat}, ${lng}`);
-            processPosition(lat, lng);
+            processPosition(lat, lng, true);
         }
     };
 
