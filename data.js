@@ -39,14 +39,16 @@ const CLUES_SETS = {
         // Coordenadas objetivo para la aventura GPS (por defecto: Madrid, España)
         // Puedes cambiar estas coordenadas por las que tú desees (lat: Latitud, lng: Longitud)
         coordinates: [
-            { lat: 37.874223, lng: -4.767843, name: "Punto 1 (Portada Feria)" },
-            { lat: 40.417312, lng: -3.701633, name: "Punto 2 (Plaza Mayor)" },
-            { lat: 40.419014, lng: -3.688348, name: "Punto 3 (Retiro)" }
+            { lat: 37.87423281806874, lng: -4.767830595150567, name: "Punto 1" },
+            { lat: 37.88021806182233, lng: -4.782356245362851, name: "Punto 2" },
+            { lat: 37.888601263876346, lng: -4.776317568955779, name: "Punto 3" },
+            { lat: 37.88438079650529, lng: -4.789654769385989, name: "Punto 4" }
         ],
         clues: [
-            { id: 1, code: "GPS_1", title: "Pista 1", description: "¡Has alcanzado la primera ubicación! Tu primera pista: Busca en el lugar donde el agua danza y la frescura se guarda en el frío.", isFinal: false },
-            { id: 2, code: "GPS_2", title: "Pista 2", description: "¡Has alcanzado la segunda ubicación! Tu segunda pista: El conocimiento silencioso se esconde entre páginas de papel antiguo.", isFinal: false },
-            { id: 3, code: "GPS_3", title: "¡FINAL!", description: "¡Has alcanzado la ubicación final! Tu última pista: El premio está al alcance de tu mano, busca bajo la sombra de la estatua dorada.", isFinal: true }
+            { id: 1, code: "GPS_1", title: "Pista 1", description: "¡Has alcanzado la primera ubicación!", isFinal: false },
+            { id: 2, code: "GPS_2", title: "Pista 2", description: "¡Has alcanzado la segunda ubicación!", isFinal: false },
+            { id: 3, code: "GPS_3", title: "Pista 3", description: "¡Has alcanzado la tercera ubicación!", isFinal: false },
+            { id: 4, code: "GPS_4", title: "¡FINAL!", description: "¡Has alcanzado la ubicación final!", isFinal: true }
         ]
     }
 };

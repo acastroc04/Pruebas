@@ -389,8 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 70px es el radio útil máximo del círculo de radar (180px de ancho total)
         const radius = normalized * 70; 
         
-        // Usamos un ángulo característico para cada checkpoint para que varíe su orientación
-        const angle = (currentGpsIndex * 120 + 35) * Math.PI / 180;
+        // Usamos un ángulo característico para cada checkpoint (90 grados por punto para 4 puntos)
+        const angle = (currentGpsIndex * 90 + 35) * Math.PI / 180;
         
         const x = Math.round(radius * Math.cos(angle));
         const y = Math.round(radius * Math.sin(angle));
