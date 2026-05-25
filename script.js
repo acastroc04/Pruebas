@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (setId === 'daniela') root.style.setProperty('--primary', 'var(--theme-daniela)');
         else if (setId === 'karla') root.style.setProperty('--primary', 'var(--theme-karla)');
         else if (setId === 'carolina') root.style.setProperty('--primary', 'var(--theme-carolina)');
+        else if (setId === 'olea') root.style.setProperty('--primary', 'var(--theme-olea)');
 
         gameTitle.textContent = setData.title;
         selectionScreen.style.display = 'none';

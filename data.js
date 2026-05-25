@@ -32,6 +32,16 @@ const CLUES_SETS = {
             { id: 4, code: "P0W3S9", title: "Pista 4", description: "El secreto se guarda en la pisada del orco que odiaba el ruido.", isFinal: false },
             { id: 5, code: "Q8X1M5", title: "¡FINAL!", description: "Dentro de tu virginidad intacta está la respuesta", isFinal: true }
         ]
+    },
+    "olea": {
+        title: "Aventura de Olea",
+        clues: [
+            { id: 1, code: "R3T8W1", title: "Pista 1", description: "Busca en el lugar donde el agua danza y la frescura se guarda en el frío.", isFinal: false },
+            { id: 2, code: "S4P9V3", title: "Pista 2", description: "[ESCRIBE AQUÍ LA PISTA 2 DE OLEA]", isFinal: false },
+            { id: 3, code: "T5Q0X7", title: "Pista 3", description: "[ESCRIBE AQUÍ LA PISTA 3 DE OLEA]", isFinal: false },
+            { id: 4, code: "U6R1Y2", title: "Pista 4", description: "[ESCRIBE AQUÍ LA PISTA 4 DE OLEA]", isFinal: false },
+            { id: 5, code: "V7S2Z8", title: "¡FINAL!", description: "[ESCRIBE AQUÍ LA PISTA FINAL DE OLEA]", isFinal: true }
+        ]
     }
 };
 
