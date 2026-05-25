@@ -138,9 +138,24 @@ document.addEventListener('DOMContentLoaded', () => {
             .filter(c => unlockedIds.includes(c.id))
             .sort((a, b) => a.id - b.id);
 
+        cluesList.innerHTML = '';
+
+        // Si hay una pista o instrucción inicial, la mostramos siempre arriba
+        if (setData.initialClue) {
+            const initialEl = document.createElement('div');
+            initialEl.className = 'clue-item initial';
+            initialEl.innerHTML = `
+                <div class="clue-header">
+                    <i data-lucide="info"></i>
+                    <h3>Pista Inicial</h3>
+                </div>
+                <p>${setData.initialClue}</p>
+            `;
+            cluesList.appendChild(initialEl);
+        }
+
         if (cluesToShow.length > 0) {
             noCluesMsg.style.display = 'none';
-            cluesList.innerHTML = '';
             cluesToShow.forEach(clue => {
                 const clueEl = document.createElement('div');
                 clueEl.id = `clue-${clue.id}`;
@@ -154,12 +169,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 cluesList.appendChild(clueEl);
             });
-            if (window.lucide) window.lucide.createIcons();
-        } else {
+        } else if (!setData.initialClue) {
             noCluesMsg.style.display = 'flex'; // Usar flex para centrar con el icono
-            cluesList.innerHTML = '';
             cluesList.appendChild(noCluesMsg);
+        } else {
+            noCluesMsg.style.display = 'none';
         }
+
+        if (window.lucide) window.lucide.createIcons();
     }
 
     function resetProgress() {

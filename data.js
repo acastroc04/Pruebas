@@ -36,6 +36,7 @@ const CLUES_SETS = {
     "olea": {
         title: "Aventura de Olea",
         isGPS: true,
+        initialClue: "¡Búsqueda GPS en marcha! Usa el radar de arriba para guiarte en el mundo real. Cuando la distancia baje del umbral en el punto correcto, la pista correspondiente se desbloqueará sola. ¡Tu primer objetivo es encontrar el Punto 1!",
         // Coordenadas objetivo para la aventura GPS (por defecto: Madrid, España)
         // Puedes cambiar estas coordenadas por las que tú desees (lat: Latitud, lng: Longitud)
         coordinates: [
