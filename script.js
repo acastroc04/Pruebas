@@ -298,8 +298,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Validación de contexto seguro (HTTPS)
-        if (!window.isSecureContext && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        // Validación de contexto seguro (HTTPS) y protocolo file://
+        if (window.location.protocol === 'file:') {
+            errorMsg = '<strong>¡Restricción del Navegador!</strong><br>' + 
+                       'Has abierto la web abriendo el archivo directamente (<code>file://</code>). ' + 
+                       'Los navegadores modernos bloquean el GPS por seguridad en archivos locales sin servidor.<br><br>' + 
+                       '<strong>Para probar en PC:</strong> Abre el <strong>Panel de Pruebas GPS</strong> que tienes abajo para simular tu avance.<br>' + 
+                       '<strong>Para jugar con GPS real:</strong> Deberás alojar esta carpeta en un servidor local (como Live Server) o subirla a un hosting HTTPS (como GitHub Pages).';
+        } else if (!window.isSecureContext && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
             errorMsg = '¡Alerta! La geolocalización requiere una conexión segura (HTTPS) en dispositivos móviles. Por favor, accede con HTTPS.';
         }
 
