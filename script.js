@@ -703,10 +703,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
+    // DETECTOR DE BOTÓN PREDOMINANTE EN MÓVIL
+    // ==========================================
+    function updatePredominantButton() {
+        // Solo se ejecuta en pantallas de tipo móvil (ancho <= 600px) y si la pantalla de selección está visible
+        if (window.innerWidth > 600 || selectionScreen.style.display === 'none') {
+            selectionBtns.forEach(btn => btn.classList.remove('mobile-active'));
+            return;
+        }
+
+        const viewportCenter = window.innerHeight / 2;
+        let closestBtn = null;
+        let minDistance = Infinity;
+
+        selectionBtns.forEach(btn => {
+            const rect = btn.getBoundingClientRect();
+            const btnCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(viewportCenter - btnCenter);
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestBtn = btn;
+            }
+        });
+
+        selectionBtns.forEach(btn => {
+            if (btn === closestBtn) {
+                btn.classList.add('mobile-active');
+            } else {
+                btn.classList.remove('mobile-active');
+            }
+        });
+    }
+
+    // Registrar eventos para actualizar el botón activo
+    window.addEventListener('scroll', updatePredominantButton, { passive: true });
+    window.addEventListener('resize', updatePredominantButton);
+
+    // ==========================================
     // INICIALIZACIÓN DE LA APLICACIÓN
     // ==========================================
     // Se ejecuta al final para asegurar que todos los listeners estén registrados
     if (currentSetId) {
         showGame(currentSetId);
+    } else {
+        updatePredominantButton();
     }
 });
