@@ -46,10 +46,10 @@ const CLUES_SETS = {
             { lat: 37.88438079650529, lng: -4.789654769385989, name: "A" }
         ],
         clues: [
-            { id: 1, code: "OL9A7F", title: "Pista 1", description: "P", isFinal: false },
+            { id: 1, code: "OL9A7F", title: "Pista 1", description: "Deberás ir a la jaula de almas en pena donde lo único bueno son las tostadas. ", isFinal: false },
             { id: 2, code: "CD3B2M", title: "Pista 2", description: "La siguiente pista la aguarda la señora que vió una mancha resurgir.", isFinal: false },
             { id: 3, code: "PZ8K5L", title: "Pista 3", description: "La próxima pista esta deseando comerse un risotto de rabo de toro.", isFinal: false },
-            { id: 4, code: "FN4W1Y", title: "¡FINAL!", description: "Ñ", isFinal: true }
+            { id: 4, code: "FN4W1Y", title: "¡FINAL!", description: "Has llegado a la recta final, nada más entrar a casa anda 29 pasos al sur y 12 al oeste. ", isFinal: true }
         ]
     }
 };
