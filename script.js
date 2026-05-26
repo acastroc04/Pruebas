@@ -616,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // CONTROLADOR DEL SIMULADOR GPS (MODO PRUEBAS)
     // ==========================================
-    const ENABLE_DEV_PANEL = true; // Cambiar a true para habilitar y poder acceder al panel de pruebas
+    const ENABLE_DEV_PANEL = false; // Cambiar a true para habilitar y poder acceder al panel de pruebas
     const simToggleBtn = document.getElementById('simToggleBtn');
     const simContent = document.getElementById('simContent');
     const simLatInput = document.getElementById('simLat');
