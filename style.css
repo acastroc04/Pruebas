@@ -569,7 +569,12 @@ footer {
    GPS SECTION & RADAR STYLES (OLEA)
    ========================================== */
 .gps-card {
-    border-color: rgba(59, 130, 246, 0.3) !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+    box-shadow: 
+        0 40px 80px -20px rgba(0, 0, 0, 0.8),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        0 0 50px -10px var(--glow-olea) !important;
+    background: linear-gradient(165deg, rgba(15, 23, 42, 0.85) 0%, rgba(2, 6, 23, 0.98) 100%) !important;
 }
 
 .gps-header {
@@ -578,6 +583,9 @@ footer {
     width: 100%;
     flex-wrap: wrap;
     gap: 1rem;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .gps-header .header-left {
@@ -586,44 +594,63 @@ footer {
     gap: 1rem;
 }
 
+.gps-header .header-left p {
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #f8fafc;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
 .gps-pulse-icon {
+    background: rgba(56, 189, 248, 0.08);
+    padding: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
     animation: gpsIconPulse 2s infinite ease-in-out;
 }
 
 @keyframes gpsIconPulse {
-    0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5)); }
-    50% { transform: scale(1.1); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.8)); }
+    0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.5)); }
+    50% { transform: scale(1.1); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.8)); }
 }
 
 .status-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 1rem;
     border-radius: 9999px;
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .status-badge.success {
     background: rgba(16, 185, 129, 0.15);
     color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    box-shadow: 0 0 15px -2px rgba(16, 185, 129, 0.2);
 }
 
 .status-badge.warning {
     background: rgba(245, 158, 11, 0.15);
     color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    box-shadow: 0 0 15px -2px rgba(245, 158, 11, 0.2);
 }
 
 .status-badge.error {
     background: rgba(239, 68, 68, 0.15);
     color: #f87171;
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    box-shadow: 0 0 15px -2px rgba(239, 68, 68, 0.2);
 }
 
 .pulse-dot {
@@ -636,20 +663,21 @@ footer {
 
 @keyframes dotPulse {
     0% { opacity: 0.4; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1.25); }
 }
 
 .gps-warning-box {
     background: rgba(239, 68, 68, 0.08);
     border: 1px solid rgba(239, 68, 68, 0.2);
-    border-radius: 1rem;
-    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    padding: 1.25rem 1.5rem;
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
     color: #fca5a5;
     animation: fadeIn 0.4s ease-out;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .gps-warning-box i {
@@ -666,7 +694,7 @@ footer {
 
 .warning-text p {
     font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .mini-btn {
@@ -675,26 +703,52 @@ footer {
     color: white;
     border: none;
     border-radius: 0.5rem;
-    padding: 0.3rem 0.75rem;
+    padding: 0.4rem 1rem;
     font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
 }
 
 .mini-btn:hover {
     background: #dc2626;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
 }
 
 /* Radar Layout */
 .radar-wrapper {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 2.25rem;
+    padding: 2.25rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 
+        inset 0 0 25px rgba(56, 189, 248, 0.04),
+        0 15px 35px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: space-around;
     gap: 2rem;
-    margin: 2.5rem 0;
+    margin: 3rem 0;
     flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle dashboard header micro-accents */
+.radar-wrapper::before {
+    content: 'SYS_HUD_DISPLAY_v2.0';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: rgba(56, 189, 248, 0.35);
+    letter-spacing: 0.15em;
+    font-weight: 700;
 }
 
 .radar-container {
@@ -753,17 +807,23 @@ footer {
 
 .radar-circle {
     position: absolute;
-    border: 1px dashed rgba(59, 130, 246, 0.2);
+    border: 1px dashed rgba(56, 189, 248, 0.2);
     border-radius: 50%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
+    animation: radarScanCircles 4s infinite ease-in-out;
 }
 
-.radar-circle.outer { width: 85%; height: 85%; }
-.radar-circle.middle { width: 55%; height: 55%; }
-.radar-circle.inner { width: 25%; height: 25%; }
+.radar-circle.outer { width: 85%; height: 85%; animation-delay: 0s; }
+.radar-circle.middle { width: 55%; height: 55%; animation-delay: 1.3s; }
+.radar-circle.inner { width: 25%; height: 25%; animation-delay: 2.6s; }
+
+@keyframes radarScanCircles {
+    0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.55; transform: translate(-50%, -50%) scale(1.02); border-style: solid; }
+}
 
 .radar-center {
     position: absolute;
@@ -860,13 +920,31 @@ footer {
 }
 
 .target-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #93c5fd;
-    background: rgba(59, 130, 246, 0.1);
-    padding: 0.3rem 0.8rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(59, 130, 246, 0.15);
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.08);
+    padding: 0.45rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.target-name::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #38bdf8, 0 0 16px #38bdf8;
+    animation: dotPulse 1.5s infinite alternate;
 }
 
 .gps-instruction {
@@ -991,23 +1069,25 @@ footer {
     width: 100%;
 }
 
-/* Simulator Panel */
+/* Simulator Panel - Cyber Green CRT Terminal style */
 .sim-panel {
-    background: rgba(15, 23, 42, 0.95);
-    border: 1px dashed rgba(59, 130, 246, 0.3);
+    background: #020617;
+    border: 1px dashed #10b981;
     border-radius: 1.25rem;
     margin-top: 2.5rem;
     overflow: hidden;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.8),
+        inset 0 0 20px rgba(16, 185, 129, 0.1);
     font-family: monospace;
 }
 
 .sim-toggle-btn {
     width: 100%;
-    background: rgba(59, 130, 246, 0.05);
+    background: rgba(16, 185, 129, 0.05);
     border: none;
     padding: 0.9rem 1.25rem;
-    color: #60a5fa;
+    color: #10b981;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1015,12 +1095,13 @@ footer {
     font-family: monospace;
     font-size: 0.85rem;
     font-weight: 700;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
 }
 
 .sim-toggle-btn:hover {
-    background: rgba(59, 130, 246, 0.1);
-    color: #93c5fd;
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
 }
 
 .sim-toggle-btn .toggle-icon {
@@ -1033,16 +1114,19 @@ footer {
 
 .sim-content {
     padding: 1.25rem;
-    border-top: 1px solid rgba(59, 130, 246, 0.15);
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    background-image: linear-gradient(rgba(16, 185, 129, 0.02) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
     animation: slideDown 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sim-desc {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: #34d399;
+    opacity: 0.8;
     line-height: 1.4;
     margin: 0;
 }
@@ -1062,8 +1146,9 @@ footer {
 .sim-col h4, .sim-coords-form h4 {
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: #93c5fd;
+    color: #34d399;
     margin: 0;
+    text-shadow: 0 0 5px rgba(16, 185, 129, 0.4);
 }
 
 .btn-group {
@@ -1073,23 +1158,24 @@ footer {
 }
 
 .sim-btn {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.25);
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.25);
     border-radius: 0.5rem;
-    padding: 0.4rem 0.6rem;
-    color: #e2e8f0;
+    padding: 0.45rem 0.75rem;
+    color: #a7f3d0;
     cursor: pointer;
     font-size: 0.75rem;
     font-family: monospace;
     font-weight: 600;
     text-align: left;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sim-btn:hover {
-    background: rgba(59, 130, 246, 0.2);
-    border-color: rgba(59, 130, 246, 0.4);
-    transform: translateX(2px);
+    background: rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+    transform: translateX(3px);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
 }
 
 .sim-btn.success {
@@ -1100,19 +1186,23 @@ footer {
 
 .sim-btn.success:hover {
     background: rgba(16, 185, 129, 0.2);
-    border-color: rgba(16, 185, 129, 0.4);
+    border-color: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
 }
 
 .sim-btn.primary {
-    background: var(--theme-olea);
-    border-color: var(--theme-olea);
+    background: #10b981;
+    border-color: #10b981;
     color: white;
     text-align: center;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 .sim-btn.primary:hover {
-    background: #2563eb;
-    transform: scale(1.02);
+    background: #34d399;
+    border-color: #34d399;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
 }
 
 .sim-coords-form {
@@ -1128,12 +1218,23 @@ footer {
 
 .coords-row input {
     flex-grow: 1;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    background: rgba(2, 6, 23, 0.5);
+    color: #34d399;
     letter-spacing: 0;
     text-transform: none;
     font-family: monospace;
+    transition: all 0.3s ease;
+}
+
+.coords-row input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    background: rgba(2, 6, 23, 0.85);
 }
 
 /* Modern Back Button (Map Style) */
@@ -1260,6 +1361,58 @@ footer {
     width: 100%;
 }
 
+/* GPS Rescue Panel (Bypass) */
+.gps-rescue-panel {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1.75rem;
+    padding: 1.75rem;
+    margin: 3rem 0 1rem;
+    position: relative;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Cyber corner tech detail badge */
+.gps-rescue-panel::before {
+    content: 'BYPASS_MODULE_SYS';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    background: #0f172a;
+    padding: 0 8px;
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: rgba(56, 189, 248, 0.5);
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 4px;
+}
+
+.rescue-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.rescue-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--theme-olea);
+    filter: drop-shadow(0 0 5px var(--glow-olea));
+}
+
+.rescue-input-group {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+}
+
 .rescue-input-wrapper {
     position: relative;
     flex-grow: 1;
@@ -1272,38 +1425,38 @@ footer {
     transform: translateY(-50%);
     width: 1.2rem;
     height: 1.2rem;
-    color: var(--primary);
+    color: var(--theme-olea);
     opacity: 0.6;
 }
 
 .rescue-input-wrapper input {
     width: 100%;
-    background: rgba(2, 6, 23, 0.4) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 1rem !important;
-    padding: 0.9rem 0.9rem 0.9rem 2.8rem !important;
+    background: rgba(2, 6, 23, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 1.25rem !important;
+    padding: 1rem 1rem 1rem 3rem !important;
     color: white !important;
     font-size: 0.95rem !important;
     font-weight: 600 !important;
-    letter-spacing: 0.1em !important;
-    transition: all 0.3s ease !important;
+    letter-spacing: 0.15em !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     text-transform: uppercase !important;
     font-family: inherit !important;
 }
 
 .rescue-input-wrapper input:focus {
     outline: none !important;
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2) !important;
-    background: rgba(2, 6, 23, 0.6) !important;
+    border-color: var(--theme-olea) !important;
+    box-shadow: 0 0 20px -2px var(--glow-olea), inset 0 1px 2px rgba(0,0,0,0.8) !important;
+    background: rgba(2, 6, 23, 0.85) !important;
 }
 
 #gpsUnlockBtn {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(37, 99, 235, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.8) 0%, rgba(3, 105, 161, 0.8) 100%);
     color: white;
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    border-radius: 1rem;
-    padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 1.25rem;
+    padding: 1rem 1.75rem;
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
@@ -1311,15 +1464,15 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     min-height: 48px;
     font-family: inherit;
 }
 
 #gpsUnlockBtn:hover {
     transform: scale(1.02);
-    background: linear-gradient(135deg, rgba(59, 130, 246, 1) 0%, rgba(37, 99, 235, 1) 100%);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, rgba(56, 189, 248, 1) 0%, rgba(3, 105, 161, 1) 100%);
+    box-shadow: 0 0 15px var(--glow-olea);
 }
 
 #gpsUnlockBtn:active {
