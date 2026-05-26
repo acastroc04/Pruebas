@@ -40,10 +40,10 @@ const CLUES_SETS = {
         // Coordenadas objetivo para la aventura GPS (por defecto: Madrid, España)
         // Puedes cambiar estas coordenadas por las que tú desees (lat: Latitud, lng: Longitud)
         coordinates: [
-            { lat: 37.87423281806874, lng: -4.767830595150567, name: "Punto 1" },
-            { lat: 37.88021806182233, lng: -4.782356245362851, name: "Punto 2" },
-            { lat: 37.888601263876346, lng: -4.776317568955779, name: "Punto 3" },
-            { lat: 37.88438079650529, lng: -4.789654769385989, name: "Punto 4" }
+            { lat: 37.87423281806874, lng: -4.767830595150567, name: "M" },
+            { lat: 37.88021806182233, lng: -4.782356245362851, name: "O" },
+            { lat: 37.888601263876346, lng: -4.776317568955779, name: "R" },
+            { lat: 37.88438079650529, lng: -4.789654769385989, name: "A" }
         ],
         clues: [
             { id: 1, code: "OL9A7F", title: "Pista 1", description: "P", isFinal: false },
