@@ -740,7 +740,7 @@ footer {
 
 /* Subtle dashboard header micro-accents */
 .radar-wrapper::before {
-    content: 'SYS_HUD_DISPLAY_v2.0';
+    content: 'OLEA_TACTICAL_HUD_v2.0';
     position: absolute;
     top: 10px;
     left: 20px;
