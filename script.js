@@ -816,23 +816,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // JUEGO DE ESCUDOS (DANIELA)
     // ==========================================
-    const ESCUDOS = [
-        {
-            image: "assets/img/Real_Madrid_CF.png",
-            answers: ["REAL MADRID"],
-            name: "Real Madrid"
-        },
-        {
-            image: "assets/img/Málaga_CF.png",
-            answers: ["MALAGA", "MÁLAGA"],
-            name: "Málaga"
-        },
-        {
-            image: "assets/img/FC_Zenit_2_star_2023_logo.png",
-            answers: ["ZENIT"],
-            name: "Zenit"
-        }
-    ];
+    // Carga los escudos definidos de forma editable en data.js
+    const ESCUDOS = window.DANIELA_ESCUDOS || [];
 
     let currentEscudoIndex = 0;
 

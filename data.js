@@ -54,12 +54,34 @@ const CLUES_SETS = {
     }
 };
 
+// CONFIGURACIÓN DE LOS ESCUDOS DEL JUEGO DE DANIELA (EDITABLE)
+// Puedes cambiar los nombres correctos (en answers) y el nombre a mostrar (en name) para cada uno:
+const DANIELA_ESCUDOS = [
+    {
+        image: "assets/img/Real_Madrid_CF.png",
+        answers: ["REAL MADRID", "MADRID"],          // Respuestas válidas (siempre en mayúsculas)
+        name: "Real Madrid"                 // Nombre que se muestra en los LEDs de progreso
+    },
+    {
+        image: "assets/img/Málaga_CF.png",
+        answers: ["MALAGA", "MÁLAGA"],      // Admite escribirlo con o sin tildes
+        name: "Málaga"
+    },
+    {
+        image: "assets/img/FC_Zenit_2_star_2023_logo.png",
+        answers: ["ZENIT DE SAN PETERSBURGO"],
+        name: "Zenit de San Petersburgo"
+    }
+];
+
 // Mensaje final de felicitación para Daniela (Editable por el usuario)
-const DANIELA_ESCUDOS_FINAL_MSG = "¡Enhorabuena Daniela! 💖 Has superado con éxito el desafío de los escudos. Has demostrado tener una memoria futbolística excelente. ¡El tesoro o tu siguiente sorpresa está cada vez más cerca! 🏆✨";
+const DANIELA_ESCUDOS_FINAL_MSG = "¡Enhorabuena Daniela! 💖 Mira el baño del orco por una sorpresa.";
 
 // Exportar
 if (typeof window !== 'undefined') {
     window.CLUES_SETS = CLUES_SETS;
     window.DANIELA_ESCUDOS_FINAL_MSG = DANIELA_ESCUDOS_FINAL_MSG;
+    window.DANIELA_ESCUDOS = DANIELA_ESCUDOS;
 }
+
 
