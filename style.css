@@ -1508,3 +1508,602 @@ footer {
     .gps-header { flex-direction: column; align-items: flex-start; }
     .gps-header .header-right { width: 100%; justify-content: flex-start; gap: 0.5rem; margin-top: 0.75rem; }
 }
+
+/* ==========================================
+   INTERFAZ PARA DANIELA: SUBMENÚ Y ESCUDOS
+   ========================================== */
+
+/* Submenú de Daniela */
+.menu-card {
+    border-color: rgba(255, 117, 195, 0.25) !important;
+    box-shadow: 
+        0 40px 80px -20px rgba(0, 0, 0, 0.8),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        0 0 50px -10px var(--glow-daniela) !important;
+}
+
+.menu-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.menu-option-btn {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1.75rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    color: var(--text-main);
+    width: 100%;
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+}
+
+.menu-option-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transition: left 0.5s ease;
+}
+
+.menu-option-btn:hover::before {
+    left: 100%;
+}
+
+.menu-option-btn:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: var(--theme-daniela);
+    box-shadow: 0 15px 30px -10px var(--glow-daniela), 0 10px 25px -5px rgba(0,0,0,0.5);
+    background: rgba(15, 23, 42, 0.65);
+}
+
+.option-icon-wrapper {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1.25rem;
+    background: rgba(255, 117, 195, 0.08);
+    border: 1px solid rgba(255, 117, 195, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-daniela);
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-option-btn:hover .option-icon-wrapper {
+    background: var(--theme-daniela);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px var(--theme-daniela);
+    transform: rotate(6deg) scale(1.05);
+}
+
+.option-icon-wrapper i {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.option-info {
+    flex-grow: 1;
+}
+
+.option-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
+    color: #f8fafc;
+    transition: color 0.3s ease;
+}
+
+.menu-option-btn:hover .option-info h3 {
+    color: var(--theme-daniela);
+}
+
+.option-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+.option-arrow {
+    width: 1.5rem;
+    height: 1.5rem;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+    color: var(--theme-daniela);
+}
+
+.menu-option-btn:hover .option-arrow {
+    opacity: 1;
+    transform: translateX(6px);
+}
+
+/* Tarjeta del Juego de Escudos */
+.escudos-card {
+    border-color: rgba(255, 117, 195, 0.25) !important;
+    box-shadow: 
+        0 40px 80px -20px rgba(0, 0, 0, 0.8),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        0 0 50px -10px var(--glow-daniela) !important;
+}
+
+.escudo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0 3rem 0;
+    width: 100%;
+}
+
+.escudo-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(15, 23, 42, 0.45) 0%, rgba(2, 6, 23, 0.9) 100%);
+    border: 2px solid rgba(255, 117, 195, 0.45);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 
+        0 0 35px var(--glow-daniela), 
+        inset 0 0 25px rgba(255, 117, 195, 0.15);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.escudo-frame::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 50%, rgba(0,0,0,0.15) 100%);
+    pointer-events: none;
+}
+
+.escudo-frame:hover {
+    transform: scale(1.06) rotate(3deg);
+    border-color: var(--theme-daniela);
+    box-shadow: 
+        0 0 45px var(--glow-daniela), 
+        inset 0 0 30px rgba(255, 117, 195, 0.25);
+}
+
+.escudo-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    transition: transform 0.5s ease;
+}
+
+.escudo-frame:hover .escudo-img {
+    transform: scale(1.03);
+}
+
+.escudos-pulse-icon {
+    background: rgba(255, 117, 195, 0.08);
+    padding: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 117, 195, 0.2);
+    box-shadow: 0 0 15px rgba(255, 117, 195, 0.15);
+    animation: danielaIconPulse 2s infinite ease-in-out;
+}
+
+@keyframes danielaIconPulse {
+    0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 117, 195, 0.5)); }
+    50% { transform: scale(1.1); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255, 117, 195, 0.8)); }
+}
+
+/* Progreso del Desafío de Escudos */
+.escudos-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    border-top: 1px solid rgba(255, 117, 195, 0.15);
+    padding-top: 1.5rem;
+    width: 100%;
+}
+
+.progress-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+}
+
+.progress-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    max-width: 280px;
+}
+
+.progress-dot {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.8);
+    border: 2px solid rgba(255, 117, 195, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.dot-inner {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progress-dot.active {
+    border-color: var(--theme-daniela);
+    background: rgba(255, 117, 195, 0.1);
+    box-shadow: 0 0 10px var(--theme-daniela);
+}
+
+.progress-dot.active .dot-inner {
+    background: var(--theme-daniela);
+    box-shadow: 0 0 8px var(--theme-daniela);
+    transform: scale(1.2);
+}
+
+.progress-dot.completed {
+    border-color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.progress-dot.completed .dot-inner {
+    background: var(--success);
+    box-shadow: 0 0 8px var(--success);
+}
+
+.progress-line {
+    flex-grow: 1;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 1;
+    transition: all 0.4s ease;
+    border-radius: 2px;
+}
+
+.progress-line.active {
+    background: var(--theme-daniela);
+    box-shadow: 0 0 8px var(--glow-daniela);
+}
+
+.progress-line.completed {
+    background: var(--success);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Tooltip para progreso */
+.dot-tooltip {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: #020617;
+    border: 1px solid rgba(255, 117, 195, 0.3);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.progress-dot:hover .dot-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================
+   MODAL DE ÉXITO SOBREPANTALLA (GLASSMORPHIC)
+   ========================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 1.5rem;
+    animation: modalFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: linear-gradient(165deg, rgba(15, 23, 42, 0.75) 0%, rgba(2, 6, 23, 0.95) 100%);
+    border: 2px solid rgba(255, 117, 195, 0.35);
+    border-radius: 2.75rem;
+    width: 100%;
+    max-width: 580px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 40px 100px -20px rgba(0, 0, 0, 0.9), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        0 0 60px -10px var(--glow-daniela);
+    transform: scale(0.9) translateY(30px);
+    opacity: 0;
+    animation: modalScaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15) 0.1s forwards;
+}
+
+@keyframes modalScaleUp {
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-glowing-back {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, var(--glow-daniela) 0%, transparent 70%);
+    filter: blur(40px);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.modal-body {
+    position: relative;
+    z-index: 2;
+    padding: 3.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-icon-container {
+    position: relative;
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
+    background: rgba(255, 117, 195, 0.08);
+    border: 2px solid rgba(255, 117, 195, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    box-shadow: 
+        0 0 30px var(--glow-daniela),
+        inset 0 0 15px rgba(255, 117, 195, 0.2);
+}
+
+.modal-trophy-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    color: var(--theme-daniela);
+    filter: drop-shadow(0 0 10px var(--theme-daniela));
+    animation: trophyFloat 3s infinite ease-in-out;
+}
+
+@keyframes trophyFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-6px) scale(1.05); }
+}
+
+/* Animaciones flotantes de las estrellas */
+.star-animation {
+    position: absolute;
+    color: var(--theme-daniela);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.star-animation i {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
+}
+
+.red-star {
+    top: 5px;
+    left: -15px;
+    animation: starFloatOne 3.2s infinite ease-in-out;
+}
+
+.yellow-star {
+    top: -20px;
+    right: 5px;
+    color: #ffb703;
+    animation: starFloatTwo 2.8s infinite ease-in-out 0.5s;
+}
+
+.blue-star {
+    bottom: 5px;
+    right: -15px;
+    color: #00f5d4;
+    animation: starFloatThree 3.5s infinite ease-in-out 1s;
+}
+
+@keyframes starFloatOne {
+    0% { transform: translate(0, 0) scale(0.6) rotate(0deg); opacity: 0; }
+    50% { transform: translate(-10px, -15px) scale(1) rotate(90deg); opacity: 0.9; }
+    100% { transform: translate(-15px, -30px) scale(0.6) rotate(180deg); opacity: 0; }
+}
+
+@keyframes starFloatTwo {
+    0% { transform: translate(0, 0) scale(0.6) rotate(0deg); opacity: 0; }
+    50% { transform: translate(15px, -20px) scale(1) rotate(-90deg); opacity: 0.9; }
+    100% { transform: translate(25px, -35px) scale(0.6) rotate(-180deg); opacity: 0; }
+}
+
+@keyframes starFloatThree {
+    0% { transform: translate(0, 0) scale(0.6) rotate(0deg); opacity: 0; }
+    50% { transform: translate(10px, -10px) scale(1.1) rotate(45deg); opacity: 0.9; }
+    100% { transform: translate(15px, -15px) scale(0.6) rotate(90deg); opacity: 0; }
+}
+
+.modal-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, var(--theme-daniela) 60%, #ff75c3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 5px 25px rgba(255, 117, 195, 0.2);
+}
+
+.modal-message-box {
+    background: rgba(2, 6, 23, 0.7);
+    border: 1px solid rgba(255, 117, 195, 0.15);
+    border-radius: 1.75rem;
+    padding: 2rem 1.75rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
+    max-height: 220px;
+    overflow-y: auto;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+    position: relative;
+}
+
+.modal-message-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-message-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-message-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 117, 195, 0.25);
+    border-radius: 10px;
+}
+
+.modal-message-box p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.modal-btn {
+    width: 100%;
+    max-width: 260px;
+    background: linear-gradient(135deg, var(--theme-daniela) 0%, #d946ef 50%, #a21caf 100%);
+    background-size: 200% auto;
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1.15rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 25px -5px var(--glow-daniela);
+    font-family: inherit;
+}
+
+.modal-btn:hover {
+    background-position: right center;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px -3px var(--glow-daniela);
+}
+
+.modal-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Adaptaciones de responsive específicas para Daniela */
+@media (max-width: 600px) {
+    .menu-option-btn {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem 1.25rem;
+        gap: 1rem;
+    }
+    
+    .menu-option-btn .option-arrow {
+        transform: rotate(90deg);
+        margin-top: 0.25rem;
+    }
+    
+    .menu-option-btn:hover .option-arrow {
+        transform: rotate(90deg) translateY(4px);
+    }
+    
+    .escudo-frame {
+        width: 150px;
+        height: 150px;
+        padding: 1.25rem;
+    }
+    
+    .modal-content {
+        border-radius: 2rem;
+    }
+    
+    .modal-body {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .modal-title {
+        font-size: 1.8rem;
+    }
+    
+    .modal-message-box {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .modal-message-box p {
+        font-size: 1rem;
+    }
+}
+

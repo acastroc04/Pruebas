@@ -54,7 +54,12 @@ const CLUES_SETS = {
     }
 };
 
+// Mensaje final de felicitación para Daniela (Editable por el usuario)
+const DANIELA_ESCUDOS_FINAL_MSG = "¡Enhorabuena Daniela! 💖 Has superado con éxito el desafío de los escudos. Has demostrado tener una memoria futbolística excelente. ¡El tesoro o tu siguiente sorpresa está cada vez más cerca! 🏆✨";
+
 // Exportar
 if (typeof window !== 'undefined') {
     window.CLUES_SETS = CLUES_SETS;
+    window.DANIELA_ESCUDOS_FINAL_MSG = DANIELA_ESCUDOS_FINAL_MSG;
 }
+

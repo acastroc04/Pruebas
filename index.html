@@ -82,6 +82,83 @@
             </header>
 
             <main>
+                <!-- SUBMENÚ DANIELA: Selección entre Pistas y Escudos -->
+                <div class="unlock-card menu-card" id="danielaMenuCard" style="display: none;">
+                    <div class="card-header menu-header">
+                        <i data-lucide="compass" class="card-icon"></i>
+                        <p>Selecciona una aventura para Daniela</p>
+                    </div>
+                    <div class="menu-options-grid">
+                        <button class="menu-option-btn" id="danielaOptionPistas">
+                            <div class="option-icon-wrapper">
+                                <i data-lucide="key-round"></i>
+                            </div>
+                            <div class="option-info">
+                                <h3>Desafío de Pistas</h3>
+                                <p>Introduce códigos secretos para desbloquear pistas ocultas.</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="option-arrow"></i>
+                        </button>
+                        <button class="menu-option-btn" id="danielaOptionEscudos">
+                            <div class="option-icon-wrapper">
+                                <i data-lucide="shield"></i>
+                            </div>
+                            <div class="option-info">
+                                <h3>Juego de Escudos</h3>
+                                <p>Identifica los escudos de los equipos de fútbol uno a uno.</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="option-arrow"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TARJETA: Juego de Escudos para Daniela -->
+                <div class="unlock-card escudos-card" id="escudosCard" style="display: none;">
+                    <div class="card-header escudos-header">
+                        <i data-lucide="trophy" class="card-icon escudos-pulse-icon"></i>
+                        <p>Desafío de Escudos de Fútbol</p>
+                    </div>
+
+                    <div class="escudo-container">
+                        <div class="escudo-frame">
+                            <img id="escudoImage" class="escudo-img" src="" alt="Cargando escudo...">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <i data-lucide="pencil" class="input-icon"></i>
+                            <input type="text" id="escudoInput" placeholder="NOMBRE DEL EQUIPO..." autocomplete="off">
+                        </div>
+                        <button id="escudoCheckBtn">
+                            <span>Comprobar</span>
+                            <i data-lucide="check"></i>
+                        </button>
+                    </div>
+                    <p id="escudoFeedback" class="feedback-msg"></p>
+
+                    <!-- Indicador de Progreso en Escudos -->
+                    <div class="escudos-progress">
+                        <span class="progress-label">Progreso</span>
+                        <div class="progress-dots">
+                            <div class="progress-dot" data-step="0">
+                                <span class="dot-inner"></span>
+                                <span class="dot-tooltip">Real Madrid</span>
+                            </div>
+                            <div class="progress-line"></div>
+                            <div class="progress-dot" data-step="1">
+                                <span class="dot-inner"></span>
+                                <span class="dot-tooltip">Málaga</span>
+                            </div>
+                            <div class="progress-line"></div>
+                            <div class="progress-dot" data-step="2">
+                                <span class="dot-inner"></span>
+                                <span class="dot-tooltip">Zenit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="unlock-card" id="unlockCard">
                     <div class="card-header">
                         <i data-lucide="key-round" class="card-icon"></i>
@@ -268,6 +345,32 @@
         <footer>
             <p>Hecho con <i data-lucide="heart" class="heart-icon"></i> para el Desafío • 2026</p>
         </footer>
+    </div>
+
+    <!-- MODAL SOBREPANTALLA: Felicitación final del Desafío de Escudos -->
+    <div id="escudosSuccessModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-glowing-back"></div>
+            <div class="modal-body">
+                <div class="modal-icon-container">
+                    <i data-lucide="trophy" class="modal-trophy-icon"></i>
+                    <div class="star-animation red-star"><i data-lucide="star"></i></div>
+                    <div class="star-animation yellow-star"><i data-lucide="star"></i></div>
+                    <div class="star-animation blue-star"><i data-lucide="star"></i></div>
+                </div>
+                
+                <h2 class="modal-title">¡Desafío Superado!</h2>
+                
+                <div class="modal-message-box">
+                    <p id="modalFinalMessage">¡Cargando felicitación...!</p>
+                </div>
+                
+                <button id="modalCloseBtn" class="modal-btn">
+                    <span>Volver al Menú</span>
+                    <i data-lucide="home"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->

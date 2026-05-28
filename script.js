@@ -13,9 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const unlockCard = document.getElementById('unlockCard');
     const noCluesMsg = document.getElementById('noCluesMsg');
 
+    // Elementos UI para Daniela (Submenú y Escudos)
+    const danielaMenuCard = document.getElementById('danielaMenuCard');
+    const danielaOptionPistas = document.getElementById('danielaOptionPistas');
+    const danielaOptionEscudos = document.getElementById('danielaOptionEscudos');
+    const escudosCard = document.getElementById('escudosCard');
+    const escudoImage = document.getElementById('escudoImage');
+    const escudoInput = document.getElementById('escudoInput');
+    const escudoCheckBtn = document.getElementById('escudoCheckBtn');
+    const escudoFeedback = document.getElementById('escudoFeedback');
+    
+    const escudosSuccessModal = document.getElementById('escudosSuccessModal');
+    const modalFinalMessage = document.getElementById('modalFinalMessage');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+
     // Estado de la aplicación
     let currentSetId = localStorage.getItem('selectedSet') || null;
     let unlockedIds = [];
+    let danielaSubMode = localStorage.getItem('daniela_submode') || 'menu';
 
     // Estado GPS para Olea
     let watchId = null;
@@ -31,8 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     backBtn.addEventListener('click', () => {
+        if (currentSetId === 'daniela') {
+            if (danielaSubMode === 'pistas' || danielaSubMode === 'escudos') {
+                danielaSubMode = 'menu';
+                localStorage.setItem('daniela_submode', 'menu');
+                showGame('daniela');
+                return;
+            }
+        }
+        
         stopGpsTracking();
         localStorage.removeItem('selectedSet');
+        localStorage.removeItem('daniela_submode');
         location.reload(); // Recargar para volver al estado inicial limpio
     });
 
@@ -69,13 +94,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Control de interfaz y servicios GPS para Olea
         const gpsCard = document.getElementById('gpsCard');
-        if (setData.isGPS) {
+        
+        // Inicialmente ocultamos paneles de Daniela
+        if (danielaMenuCard) danielaMenuCard.style.display = 'none';
+        if (escudosCard) escudosCard.style.display = 'none';
+
+        if (setId === 'olea') {
             unlockCard.style.display = 'none';
             if (gpsCard) gpsCard.style.display = 'block';
             startGpsTracking();
+        } else if (setId === 'daniela') {
+            if (gpsCard) gpsCard.style.display = 'none';
+            stopGpsTracking();
+            
+            // Lógica de submodos de Daniela
+            if (danielaSubMode === 'menu') {
+                danielaMenuCard.style.display = 'block';
+                unlockCard.style.display = 'none';
+                document.querySelector('.clues-container').style.display = 'none';
+            } else if (danielaSubMode === 'pistas') {
+                danielaMenuCard.style.display = 'none';
+                unlockCard.style.display = 'block';
+                document.querySelector('.clues-container').style.display = 'block';
+            } else if (danielaSubMode === 'escudos') {
+                danielaMenuCard.style.display = 'none';
+                unlockCard.style.display = 'none';
+                document.querySelector('.clues-container').style.display = 'none';
+                if (escudosCard) escudosCard.style.display = 'block';
+                initEscudosGame();
+            }
         } else {
             unlockCard.style.display = 'block';
             if (gpsCard) gpsCard.style.display = 'none';
+            document.querySelector('.clues-container').style.display = 'block';
             stopGpsTracking();
         }
 
@@ -188,6 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem(`unlocked_${setId}`);
             });
             localStorage.removeItem('selectedSet');
+            localStorage.removeItem('daniela_submode');
+            localStorage.removeItem('daniela_escudo_index');
+            localStorage.removeItem('daniela_escudos_completed');
 
             showFeedback('Todo el progreso ha sido borrado.', 'success');
 
@@ -739,6 +793,194 @@ document.addEventListener('DOMContentLoaded', () => {
     // Registrar eventos para actualizar el botón activo
     window.addEventListener('scroll', updatePredominantButton, { passive: true });
     window.addEventListener('resize', updatePredominantButton);
+
+    // ==========================================
+    // NAVEGACIÓN Y EVENTOS DEL SUBMENÚ DE DANIELA
+    // ==========================================
+    if (danielaOptionPistas) {
+        danielaOptionPistas.addEventListener('click', () => {
+            danielaSubMode = 'pistas';
+            localStorage.setItem('daniela_submode', 'pistas');
+            showGame('daniela');
+        });
+    }
+
+    if (danielaOptionEscudos) {
+        danielaOptionEscudos.addEventListener('click', () => {
+            danielaSubMode = 'escudos';
+            localStorage.setItem('daniela_submode', 'escudos');
+            showGame('daniela');
+        });
+    }
+
+    // ==========================================
+    // JUEGO DE ESCUDOS (DANIELA)
+    // ==========================================
+    const ESCUDOS = [
+        {
+            image: "assets/img/Real_Madrid_CF.png",
+            answers: ["REAL MADRID"],
+            name: "Real Madrid"
+        },
+        {
+            image: "assets/img/Málaga_CF.png",
+            answers: ["MALAGA", "MÁLAGA"],
+            name: "Málaga"
+        },
+        {
+            image: "assets/img/FC_Zenit_2_star_2023_logo.png",
+            answers: ["ZENIT"],
+            name: "Zenit"
+        }
+    ];
+
+    let currentEscudoIndex = 0;
+
+    function initEscudosGame() {
+        currentEscudoIndex = parseInt(localStorage.getItem('daniela_escudo_index')) || 0;
+        
+        // Si ya estaba completado de antes, mostramos el modal final directamente
+        const completed = localStorage.getItem('daniela_escudos_completed') === 'true';
+        if (completed) {
+            showEscudosSuccessModal();
+        }
+        
+        loadEscudo(currentEscudoIndex);
+    }
+
+    function loadEscudo(index) {
+        if (index >= ESCUDOS.length) {
+            index = ESCUDOS.length - 1;
+        }
+        
+        const escudo = ESCUDOS[index];
+        if (escudoImage) {
+            escudoImage.src = escudo.image;
+            escudoImage.alt = `Escudo del equipo ${index + 1}`;
+        }
+        if (escudoInput) {
+            escudoInput.value = '';
+            escudoInput.placeholder = `EQUIPO ${index + 1}...`;
+            setTimeout(() => escudoInput.focus(), 150);
+        }
+        if (escudoFeedback) {
+            escudoFeedback.textContent = '';
+        }
+        
+        updateEscudosProgress(index);
+    }
+
+    function updateEscudosProgress(currentIndex) {
+        const dots = document.querySelectorAll('.progress-dot');
+        const lines = document.querySelectorAll('.progress-line');
+        
+        dots.forEach((dot, idx) => {
+            dot.className = 'progress-dot';
+            if (idx < currentIndex) {
+                dot.classList.add('completed');
+            } else if (idx === currentIndex) {
+                dot.classList.add('active');
+            }
+        });
+        
+        lines.forEach((line, idx) => {
+            line.className = 'progress-line';
+            if (idx < currentIndex) {
+                line.classList.add('completed');
+            } else if (idx === currentIndex) {
+                line.classList.add('active');
+            }
+        });
+    }
+
+    function handleEscudoCheck() {
+        if (!escudoInput || !escudoFeedback) return;
+        
+        const userInput = escudoInput.value.trim().toUpperCase();
+        if (!userInput) return;
+        
+        const currentEscudo = ESCUDOS[currentEscudoIndex];
+        
+        // Validar si coincide con alguna respuesta válida (insensible a acentos/mayúsculas)
+        const isCorrect = currentEscudo.answers.some(ans => {
+            return ans.toUpperCase().trim() === userInput;
+        });
+        
+        if (isCorrect) {
+            showEscudoFeedback('¡Correcto!', 'success');
+            
+            // Iluminar el dot de progreso actual inmediatamente como completado
+            const currentDot = document.querySelector(`.progress-dot[data-step="${currentEscudoIndex}"]`);
+            if (currentDot) {
+                currentDot.className = 'progress-dot completed';
+            }
+            
+            currentEscudoIndex++;
+            
+            if (currentEscudoIndex >= ESCUDOS.length) {
+                // Fin del juego
+                localStorage.setItem('daniela_escudo_index', ESCUDOS.length - 1);
+                localStorage.setItem('daniela_escudos_completed', 'true');
+                
+                setTimeout(() => {
+                    showEscudosSuccessModal();
+                }, 800);
+            } else {
+                localStorage.setItem('daniela_escudo_index', currentEscudoIndex);
+                setTimeout(() => {
+                    loadEscudo(currentEscudoIndex);
+                }, 1000);
+            }
+        } else {
+            showEscudoFeedback('Nombre incorrecto, ¡sigue intentándolo!', 'error');
+            
+            // Efecto shake en la tarjeta de escudos
+            if (escudosCard) {
+                escudosCard.classList.add('shake');
+                setTimeout(() => escudosCard.classList.remove('shake'), 400);
+            }
+        }
+    }
+
+    function showEscudoFeedback(message, type) {
+        if (!escudoFeedback) return;
+        escudoFeedback.textContent = message;
+        escudoFeedback.style.color = type === 'success' ? 'var(--success)' : 'var(--error)';
+    }
+
+    function showEscudosSuccessModal() {
+        if (escudosSuccessModal && modalFinalMessage) {
+            modalFinalMessage.textContent = window.DANIELA_ESCUDOS_FINAL_MSG || '¡Felicidades!';
+            escudosSuccessModal.style.display = 'flex';
+            if (window.lucide) window.lucide.createIcons();
+        }
+    }
+
+    // Registrar eventos para el juego de escudos
+    if (escudoCheckBtn) {
+        escudoCheckBtn.addEventListener('click', handleEscudoCheck);
+    }
+    if (escudoInput) {
+        escudoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleEscudoCheck();
+        });
+    }
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', () => {
+            if (escudosSuccessModal) {
+                escudosSuccessModal.style.display = 'none';
+            }
+            // Resetear progreso para que puedan jugar de nuevo si quieren
+            localStorage.removeItem('daniela_escudo_index');
+            localStorage.removeItem('daniela_escudos_completed');
+            currentEscudoIndex = 0;
+            
+            // Regresar al submenú de Daniela
+            danielaSubMode = 'menu';
+            localStorage.setItem('daniela_submode', 'menu');
+            showGame('daniela');
+        });
+    }
 
     // ==========================================
     // INICIALIZACIÓN DE LA APLICACIÓN
