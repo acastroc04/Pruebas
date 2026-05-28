@@ -253,10 +253,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showFeedback(message, type) {
-        feedback.textContent = message;
-        feedback.style.color = type === 'success' ? 'var(--success)' :
-            type === 'info' ? 'var(--primary)' : 'var(--error)';
-        setTimeout(() => feedback.textContent = '', 3000);
+        if (!feedback) return;
+        
+        let iconHtml = '';
+        if (type === 'success') {
+            iconHtml = '<i data-lucide="check-circle-2"></i>';
+            feedback.className = 'feedback-msg success show';
+        } else if (type === 'info') {
+            iconHtml = '<i data-lucide="info"></i>';
+            feedback.className = 'feedback-msg info show';
+        } else {
+            iconHtml = '<i data-lucide="alert-circle"></i>';
+            feedback.className = 'feedback-msg error show';
+        }
+        
+        feedback.innerHTML = `${iconHtml} <span>${message}</span>`;
+        if (window.lucide) window.lucide.createIcons();
+        
+        setTimeout(() => {
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }, 3000);
     }
 
     function triggerError() {
@@ -849,7 +867,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => escudoInput.focus(), 150);
         }
         if (escudoFeedback) {
-            escudoFeedback.textContent = '';
+            escudoFeedback.innerHTML = '';
+            escudoFeedback.className = 'feedback-msg';
         }
         
         updateEscudosProgress(index);
@@ -900,6 +919,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentDot.className = 'progress-dot completed';
             }
             
+            // Iluminar la línea de progreso actual inmediatamente como completada
+            const lines = document.querySelectorAll('.progress-line');
+            if (lines[currentEscudoIndex]) {
+                lines[currentEscudoIndex].className = 'progress-line completed';
+            }
+            
             currentEscudoIndex++;
             
             if (currentEscudoIndex >= ESCUDOS.length) {
@@ -929,8 +954,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showEscudoFeedback(message, type) {
         if (!escudoFeedback) return;
-        escudoFeedback.textContent = message;
-        escudoFeedback.style.color = type === 'success' ? 'var(--success)' : 'var(--error)';
+        
+        let iconHtml = '';
+        if (type === 'success') {
+            iconHtml = '<i data-lucide="check-circle-2"></i>';
+            escudoFeedback.className = 'feedback-msg success show';
+        } else {
+            iconHtml = '<i data-lucide="alert-circle"></i>';
+            escudoFeedback.className = 'feedback-msg error show';
+        }
+        
+        escudoFeedback.innerHTML = `${iconHtml} <span>${message}</span>`;
+        if (window.lucide) window.lucide.createIcons();
+        
+        setTimeout(() => {
+            if (escudoFeedback.classList.contains('show') && type === 'error') {
+                escudoFeedback.classList.remove('show');
+            }
+        }, 3000);
     }
 
     function showEscudosSuccessModal() {
