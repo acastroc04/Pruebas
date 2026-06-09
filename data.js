@@ -20,7 +20,7 @@ const CLUES_SETS = {
             { id: 2, code: "G6N2L0", title: "Pista 2", description: "La siguiente está en un recipiente antiguo con grumos.", isFinal: false },
             { id: 3, code: "H4P7V2", title: "Pista 3", description: "Tu siguiente pista está detrás de la puerta que ha presenciado actos impuros.", isFinal: false },
             { id: 4, code: "J9W1R5", title: "Pista 4", description: "[ESCRIBE AQUÍ LA PISTA 4]", isFinal: false },
-            { id: 5, code: "K2X8M4", title: "¡FINAL!", description: "[ESCRIBE AQUÍ LA PISTA FINAL]", isFinal: true }
+            { id: 5, code: "K2X8M4", title: "¡FINAL!", description: "El regalo está sobretodos nosotros, donde todo ve pasar el tiempo.", isFinal: true }
         ]
     },
     "carolina": {
