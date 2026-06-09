@@ -59,12 +59,12 @@ const CLUES_SETS = {
 const DANIELA_ESCUDOS = [
     {
         image: "assets/img/Real_Madrid_CF.png",
-        answers: ["REAL MADRID", "MADRID"],          // Respuestas válidas (siempre en mayúsculas)
-        name: "Real Madrid"                 // Nombre que se muestra en los LEDs de progreso
+        answers: ["REAL MADRID", "MADRID"],
+        name: "Real Madrid"
     },
     {
         image: "assets/img/Málaga_CF.png",
-        answers: ["MALAGA", "MÁLAGA"],      // Admite escribirlo con o sin tildes
+        answers: ["MALAGA", "MÁLAGA"],
         name: "Málaga"
     },
     {
